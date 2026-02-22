@@ -150,6 +150,7 @@ async function router() {
   if (path === '/register') return renderRegister();
   if (path === '/forgot-password') return renderForgotPassword();
   if (path === '/dashboard') return renderDashboard();
+  if (path === '/ebook') return renderEbook();
   if (path === '/settings') return renderSettings();
   if (path.startsWith('/level/')) return renderLevel(parseInt(path.split('/')[2]));
 
@@ -383,6 +384,17 @@ async function renderDashboard() {
               </a>`;
           }).join('')}
         </div>
+        <section class="ebook-dash-section">
+          <h2 class="section-heading">Your Ebook</h2>
+          <a href="#/ebook" class="ebook-dash-card">
+            <div class="ebook-dash-icon">📖</div>
+            <div class="ebook-dash-body">
+              <div class="ebook-dash-title">The Handstand — The Complete Training Guide</div>
+              <div class="ebook-dash-sub">View or download your guide anytime.</div>
+            </div>
+            <div class="ebook-dash-arrow">›</div>
+          </a>
+        </section>
         ${recentLogs.length ? `
           <h2 class="section-heading">Recent Activity</h2>
           <div class="activity-list">
@@ -400,6 +412,44 @@ async function renderDashboard() {
   } catch (err) {
     app.innerHTML = `<div class="container"><div class="alert alert-error">${esc(err.message)}</div></div>`;
   }
+}
+
+// ===== EBOOK =====
+function renderEbook() {
+  const ebookViewUrl = window.location.origin + '/assets/ebook.html';
+  const ebookDownloadUrl = window.location.origin + '/download/ebook';
+
+  app.innerHTML = `
+    <div class="container">
+      ${heroHtml()}
+      <div class="page-header">
+        <a href="#/dashboard" class="back-link">← Dashboard</a>
+        <h1>Your Ebook</h1>
+      </div>
+
+      <div class="ebook-page-card">
+        <div class="ebook-page-cover">
+          <div class="ebook-page-cover-inner">
+            <span class="ebook-page-cover-the">The</span>
+            <h2 class="ebook-page-cover-title">Handstand</h2>
+            <div class="ebook-page-cover-line"></div>
+            <span class="ebook-page-cover-sub">The Complete Training Guide</span>
+          </div>
+        </div>
+        <div class="ebook-page-content">
+          <p class="ebook-page-desc">Your complete handstand training guide is always here. Read it in the browser or download a copy to keep offline.</p>
+          <div class="ebook-page-actions">
+            <a href="${ebookViewUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full ebook-btn">
+              <span class="ebook-btn-icon">👁</span> View Ebook
+            </a>
+            <a href="${ebookDownloadUrl}" download class="btn btn-ghost btn-full ebook-btn">
+              <span class="ebook-btn-icon">⬇</span> Download (HTML)
+            </a>
+          </div>
+          <p class="ebook-page-tip">💡 To save as PDF: open the ebook, then use your browser’s Print (Ctrl+P / Cmd+P) and choose “Save as PDF”.</p>
+        </div>
+      </div>
+    </div>`;
 }
 
 // ===== SETTINGS =====
