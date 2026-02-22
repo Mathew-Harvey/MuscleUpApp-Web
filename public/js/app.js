@@ -1005,7 +1005,7 @@ function getImagesForExercise(ex) {
   if (!ex) return [];
   const keyFrom = (s) => String(s || '').toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
   const key = keyFrom(ex.key);
-  const nameKey = String(ex.name || '').toLowerCase().replace(/\s+/g, '_');
+  const nameKey = keyFrom(ex.name);
   if (EXERCISE_PROGRESSION_IMAGES[key]) return EXERCISE_PROGRESSION_IMAGES[key];
   if (EXERCISE_PROGRESSION_IMAGES[nameKey]) return EXERCISE_PROGRESSION_IMAGES[nameKey];
   const single = EXERCISE_IMAGES[key] || EXERCISE_IMAGES[nameKey];
