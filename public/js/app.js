@@ -1,5 +1,5 @@
 /* ================================================================
-   Muscle Up Tracker — SPA Client
+   Muscle Up Tracker - SPA Client
    Hash-based routing, API integration, timer, progress logging
    ================================================================ */
 
@@ -389,7 +389,7 @@ async function renderDashboard() {
           <a href="#/ebook" class="ebook-dash-card">
             <div class="ebook-dash-icon">📖</div>
             <div class="ebook-dash-body">
-              <div class="ebook-dash-title">The Muscle Up — The Complete Training Guide</div>
+              <div class="ebook-dash-title">The Muscle Up - The Complete Training Guide</div>
               <div class="ebook-dash-sub">View or download your guide anytime.</div>
             </div>
             <div class="ebook-dash-arrow">›</div>
@@ -416,40 +416,60 @@ async function renderDashboard() {
 
 // ===== EBOOK =====
 function renderEbook() {
-  const ebookViewUrl = window.location.origin + '/assets/ebook.html';
-  const ebookDownloadUrl = window.location.origin + '/download/ebook';
-
   app.innerHTML = `
     <div class="container">
       ${heroHtml()}
       <div class="page-header">
         <a href="#/dashboard" class="back-link">← Dashboard</a>
-        <h1>Your Ebook</h1>
+        <h1>Training Guide</h1>
+        <p class="auth-sub">The Muscle Up — The Complete Training Guide</p>
       </div>
-
-      <div class="ebook-page-card">
-        <div class="ebook-page-cover">
-          <div class="ebook-page-cover-inner">
-            <span class="ebook-page-cover-the">The</span>
-            <h2 class="ebook-page-cover-title">Muscle Up</h2>
-            <div class="ebook-page-cover-line"></div>
-            <span class="ebook-page-cover-sub">The Complete Training Guide</span>
+      <div class="ebook-hero">
+        <div class="ebook-hero-cover">
+          <img src="/images/freestandinghandstand1.png" alt="" class="ebook-cover-img">
+        </div>
+        <div class="ebook-hero-body">
+          <h2 class="ebook-title">From Zero to Muscle Up</h2>
+          <p class="ebook-desc">Your complete programme lives in the guide: levels 1–6, exercises, progressions, and graduation tests. Read it online anytime or download for offline use.</p>
+          <div class="ebook-actions">
+            <button type="button" class="btn btn-primary btn-full ebook-btn-primary" id="ebookViewBtn">
+              <span class="ebook-btn-icon">📖</span> View &amp; read online
+            </button>
+            <p class="ebook-download-hint">PDF and ePub downloads are available inside the reader (tap the download icon in the toolbar).</p>
           </div>
         </div>
-        <div class="ebook-page-content">
-          <p class="ebook-page-desc">Your complete muscle up training guide is always here. Read it in the browser or download a copy to keep offline.</p>
-          <div class="ebook-page-actions">
-            <a href="${ebookViewUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full ebook-btn">
-              <span class="ebook-btn-icon">👁</span> View Ebook
-            </a>
-            <a href="${ebookDownloadUrl}" download class="btn btn-ghost btn-full ebook-btn">
-              <span class="ebook-btn-icon">⬇</span> Download (HTML)
-            </a>
+      </div>
+      <div class="ebook-features">
+        <div class="ebook-feature">
+          <span class="ebook-feature-icon">📑</span>
+          <div>
+            <strong>Table of contents</strong>
+            <span>Jump to any chapter from the sidebar.</span>
           </div>
-          <p class="ebook-page-tip">💡 To save as PDF: open the ebook, then use your browser’s Print (Ctrl+P / Cmd+P) and choose “Save as PDF”.</p>
+        </div>
+        <div class="ebook-feature">
+          <span class="ebook-feature-icon">🌙</span>
+          <div>
+            <strong>Light, sepia &amp; dark</strong>
+            <span>Choose a theme that suits you.</span>
+          </div>
+        </div>
+        <div class="ebook-feature">
+          <span class="ebook-feature-icon">⬇️</span>
+          <div>
+            <strong>Download anytime</strong>
+            <span>Export as PDF (print) or ePub for Apple Books, Kindle, Kobo.</span>
+          </div>
         </div>
       </div>
     </div>`;
+  $('#ebookViewBtn').addEventListener('click', openEbook);
+}
+
+function openEbook() {
+  const url = window.location.origin + '/assets/ebook.html';
+  window.open(url, '_blank', 'noopener,noreferrer');
+  toast('Opening your training guide…', true);
 }
 
 // ===== SETTINGS =====
@@ -813,7 +833,7 @@ async function renderLevel(num) {
               <div class="grad-desc">${esc(levelData.graduation)}</div>
             </div>
           </div>
-          ${!graduated ? `<button class="btn btn-accent btn-full" id="graduateBtn">I've passed — Graduate Level ${num}</button>` : ''}
+          ${!graduated ? `<button class="btn btn-accent btn-full" id="graduateBtn">I've passed - Graduate Level ${num}</button>` : ''}
         </div>
 
         <!-- History -->
