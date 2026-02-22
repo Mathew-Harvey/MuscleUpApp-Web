@@ -389,7 +389,7 @@ async function renderDashboard() {
           <a href="#/ebook" class="ebook-dash-card">
             <div class="ebook-dash-icon">📖</div>
             <div class="ebook-dash-body">
-              <div class="ebook-dash-title">The Handstand — The Complete Training Guide</div>
+              <div class="ebook-dash-title">The Muscle Up — The Complete Training Guide</div>
               <div class="ebook-dash-sub">View or download your guide anytime.</div>
             </div>
             <div class="ebook-dash-arrow">›</div>
@@ -431,13 +431,13 @@ function renderEbook() {
         <div class="ebook-page-cover">
           <div class="ebook-page-cover-inner">
             <span class="ebook-page-cover-the">The</span>
-            <h2 class="ebook-page-cover-title">Handstand</h2>
+            <h2 class="ebook-page-cover-title">Muscle Up</h2>
             <div class="ebook-page-cover-line"></div>
             <span class="ebook-page-cover-sub">The Complete Training Guide</span>
           </div>
         </div>
         <div class="ebook-page-content">
-          <p class="ebook-page-desc">Your complete handstand training guide is always here. Read it in the browser or download a copy to keep offline.</p>
+          <p class="ebook-page-desc">Your complete muscle up training guide is always here. Read it in the browser or download a copy to keep offline.</p>
           <div class="ebook-page-actions">
             <a href="${ebookViewUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full ebook-btn">
               <span class="ebook-btn-icon">👁</span> View Ebook

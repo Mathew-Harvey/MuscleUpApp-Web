@@ -9,7 +9,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 // Ebook download — serve as attachment so browser downloads the file
 app.get('/download/ebook', (req, res) => {
   const file = path.join(__dirname, 'assets', 'ebook.html');
-  res.download(file, 'The-Handstand-Training-Guide.html', (err) => {
+  res.download(file, 'The-Muscle-Up-Training-Guide.html', (err) => {
     if (err && !res.headersSent) res.status(500).send('Download failed');
   });
 });
