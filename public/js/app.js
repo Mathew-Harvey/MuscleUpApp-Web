@@ -183,6 +183,7 @@ function renderLogin() {
   nav.style.display = 'none';
   app.innerHTML = `
     <div class="auth-page">
+      ${heroHtml('hero--auth')}
       <div class="auth-card">
         <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
         <h1>Welcome back</h1>
@@ -230,6 +231,7 @@ function renderRegister() {
   nav.style.display = 'none';
   app.innerHTML = `
     <div class="auth-page">
+      ${heroHtml('hero--auth')}
       <div class="auth-card">
         <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
         <h1>Create your account</h1>
@@ -283,6 +285,7 @@ function renderForgotPassword() {
   nav.style.display = 'none';
   app.innerHTML = `
     <div class="auth-page">
+      ${heroHtml('hero--auth')}
       <div class="auth-card">
         <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
         <h1>Reset password</h1>
@@ -353,6 +356,7 @@ async function renderDashboard() {
 
     app.innerHTML = `
       <div class="container">
+        ${heroHtml()}
         <section class="stats-bar">
           <div class="stat"><div class="stat-num">${user.current_level}</div><div class="stat-label">Current Level</div></div>
           <div class="stat"><div class="stat-num">${totalSessions}</div><div class="stat-label">Sessions</div></div>
@@ -406,6 +410,7 @@ async function renderSettings() {
 
   app.innerHTML = `
     <div class="container">
+      ${heroHtml()}
       <div class="page-header">
         <a href="#/dashboard" class="back-link">← Dashboard</a>
         <h1>Settings</h1>
@@ -696,6 +701,7 @@ async function renderLevel(num) {
 
     app.innerHTML = `
       <div class="container">
+        ${heroHtml()}
         <div class="level-header">
           <a href="#/dashboard" class="back-link">← Dashboard</a>
           <div class="level-header-num">Level ${num}</div>
@@ -724,12 +730,17 @@ async function renderLevel(num) {
         <!-- Exercises -->
         ${levelData.exercises.map((ex, i) => {
           const vid = extractVideoId(ex.video);
+          const images = getImagesForExercise(ex);
+          const imgHtml = images.length === 0 ? '' : images.length === 1
+            ? `<div class="exercise-img-wrap"><img src="${ASSETS_BASE}/${images[0]}" alt="${esc(ex.name)}" class="exercise-img" loading="lazy"></div>`
+            : `<div class="exercise-progression">${images.map((file, j) => `<img src="${ASSETS_BASE}/${file}" alt="${esc(ex.name)} (${j + 1}/${images.length})" class="exercise-img" loading="lazy">`).join('')}</div>`;
           return `
             <div class="exercise-card" id="ex-${ex.key}">
               <div class="exercise-card-header">
                 <h3>${esc(ex.name)}</h3>
                 <div class="exercise-rx">${esc(ex.rx)}</div>
               </div>
+              ${imgHtml}
               ${vid ? `<div class="video-wrap"><iframe src="https://www.youtube.com/embed/${vid}" title="${esc(ex.name)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}
               <form class="log-form" data-level="${num}" data-key="${ex.key}">
                 <div class="log-form-row">
@@ -946,6 +957,59 @@ function toast(msg, success) {
   requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('toast--visible')));
   clearTimeout(toastTimeout);
   toastTimeout = setTimeout(() => t.classList.remove('toast--visible'), 2500);
+}
+
+// ===== EXERCISE IMAGES (aligned to Ring Muscle Up Program PDF) =====
+// Single-image map (exercise key → one filename).
+const EXERCISE_IMAGES = {
+  false_grip_stretch: 'fgringstretch.png',
+  arm_extension_stretch: 'armExtensionStretch.png',
+  ring_hang: 'ringhang.png',
+  false_grip: 'ringfalsegrip.png',
+  false_grip_ring_rows: 'fgringrowtop.png',
+  ring_push_ups: 'ringpushuptop.png',
+  ring_push_ups_turn_out: 'ringpushuptop.png',
+  false_grip_hang: 'fgringhang.png',
+  transition_ring_rows: 'ringrowtransitionmiddle.png',
+  pull_up: 'ringpulluptop.png',
+  bar_dip: 'bardipbottom.png',
+  false_grip_pull_ups: 'fgpulluptop.png',
+  ring_dips_turn_out: 'rgmuscledownbottomdip.png',
+  ring_dips: 'rgmuscledownbottomdip.png',
+  bent_arm_false_grip_hang: 'fgpulluptop.png',
+  tempo_eccentric_ring_muscle_up: 'rgmuscledowntop.png',
+  ring_muscle_up: 'ringmu3.png',
+  muscle_up_conditioning: 'ringmu5.png',
+};
+// Progression sets (exercise key → array of filenames in order). Use these when present instead of single image.
+const EXERCISE_PROGRESSION_IMAGES = {
+  ring_muscle_up: ['ringmu1.png', 'ringmu2.png', 'ringmu3.png', 'ringmu4.png', 'ringmu5.png'],
+  muscle_up_conditioning: ['ringmu1.png', 'ringmu2.png', 'ringmu3.png', 'ringmu4.png', 'ringmu5.png'],
+  tempo_eccentric_ring_muscle_up: ['rgmuscledowntop.png', 'rgmuscledowndiptransition.png', 'rgmuscledownbottomdip.png', 'rgmuscledownbottom.png'],
+  false_grip_ring_rows: ['fgringrowbottom.png', 'fgringrowtop.png'],
+  ring_push_ups: ['ringpushupbottom.png', 'ringpushuptop.png'],
+  ring_push_ups_turn_out: ['ringpushupbottom.png', 'ringpushuptop.png'],
+  transition_ring_rows: ['ringrowtransitiontop.png', 'ringrowtransitionmiddle.png', 'ringrowtransistionbottom.png'],
+  pull_up: ['ringpullupbottom.png', 'ringpullupscapdownmiddle.png', 'ringpulluptop.png'],
+  bar_dip: ['bardiptop.png', 'bardipbottom.png'],
+  false_grip_stretch: ['wrist01.png', 'wrist02.png', 'wrist03.png'],
+};
+const ASSETS_BASE = '/assets/images';
+const HERO_IMAGE = ASSETS_BASE + '/coverpage.png';
+
+function heroHtml(className = '') {
+  return `<div class="hero ${className}"><img src="${HERO_IMAGE}" alt="The Ring Muscle Up" class="hero-img" loading="lazy"></div>`;
+}
+
+function getImagesForExercise(ex) {
+  if (!ex) return [];
+  const keyFrom = (s) => String(s || '').toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+  const key = keyFrom(ex.key);
+  const nameKey = String(ex.name || '').toLowerCase().replace(/\s+/g, '_');
+  if (EXERCISE_PROGRESSION_IMAGES[key]) return EXERCISE_PROGRESSION_IMAGES[key];
+  if (EXERCISE_PROGRESSION_IMAGES[nameKey]) return EXERCISE_PROGRESSION_IMAGES[nameKey];
+  const single = EXERCISE_IMAGES[key] || EXERCISE_IMAGES[nameKey];
+  return single ? [single] : [];
 }
 
 // ===== HELPERS =====

@@ -89,11 +89,35 @@ img { max-width: 100%; display: block; }
 .container { max-width: 640px; margin: 0 auto; padding: 1rem; }
 @media (min-width: 768px) { .container { padding: 1.5rem 2rem; max-width: 720px; } }
 
+/* ===== HERO (cover image throughout, no crop) ===== */
+.hero {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: var(--dark);
+}
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center top;
+}
+.hero--auth {
+  flex-shrink: 0;
+  margin-bottom: 0.75rem;
+}
+
 /* ===== AUTH PAGES ===== */
 .auth-page {
   min-height: 100dvh;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
   padding: 1.5rem;
+  overflow-y: auto;
+}
+.auth-page .auth-card {
+  margin-top: 0.5rem;
 }
 .auth-card {
   width: 100%; max-width: 380px;
@@ -266,6 +290,44 @@ img { max-width: 100%; display: block; }
 .exercise-card-header { padding: 1rem 1rem 0.5rem; }
 .exercise-card-header h3 { font-size: 1rem; font-weight: 700; color: var(--light); margin-bottom: 0.15rem; }
 .exercise-rx { font-size: 0.8rem; color: var(--accent2); font-weight: 500; }
+
+/* Exercise image (uniform programme visuals, no crop) */
+.exercise-img-wrap {
+  margin: 0 0.75rem 0.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--navy);
+}
+.exercise-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+/* Progression set (multiple images in order) */
+.exercise-progression {
+  margin: 0 0.75rem 0.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--navy);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+}
+.exercise-progression .exercise-img {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+@media (min-width: 480px) {
+  .exercise-progression .exercise-img { max-width: calc(50% - 0.25rem); }
+}
+@media (min-width: 640px) {
+  .exercise-progression .exercise-img { max-width: calc(33.333% - 0.35rem); }
+}
 
 /* Video embed */
 .video-wrap {
