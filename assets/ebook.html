@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Muscle Up — The Complete Training Guide</title>
-<link rel="icon" href="assets/images/freestandinghandstand1.png" type="image/png">
+<title>The Ring Muscle Up — The Complete Training Guide</title>
+<link rel="icon" href="assets/images/coverpage.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ================================================================
-   EBOOK READER — The Muscle Up
+   EBOOK READER — The Ring Muscle Up
    Scroll-based reader with sidebar TOC, themes, responsive
    ================================================================ */
 
@@ -21,12 +21,12 @@
   --heading2: #1e3a5f;
   --sub: #64748b;
   --border: #e2e8f0;
-  --accent: #2980B9;
-  --accent-soft: rgba(41,128,185,0.10);
+  --accent: #c8a55c;
+  --accent-soft: rgba(200,165,92,0.12);
   --exbox-bg: #fafaf9;
   --table-header-bg: #0f172a;
   --table-header-text: #fff;
-  --link: #2980B9;
+  --link: #c8a55c;
   --shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 [data-theme="sepia"] {
@@ -36,12 +36,12 @@
   --heading2: #4a3728;
   --sub: #7a6652;
   --border: #d4c4a0;
-  --accent: #2472a4;
-  --accent-soft: rgba(36,114,164,0.10);
+  --accent: #a07830;
+  --accent-soft: rgba(160,120,48,0.12);
   --exbox-bg: #f0e8d6;
   --table-header-bg: #3e2c1c;
   --table-header-text: #f8f1e3;
-  --link: #2472a4;
+  --link: #a07830;
   --shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 [data-theme="dark"] {
@@ -51,12 +51,12 @@
   --heading2: #e2e8f0;
   --sub: #94a3b8;
   --border: #2d2d4a;
-  --accent: #5dade2;
-  --accent-soft: rgba(93,173,226,0.12);
+  --accent: #d4b76a;
+  --accent-soft: rgba(212,183,106,0.12);
   --exbox-bg: #1e1e38;
   --table-header-bg: #0f0f24;
   --table-header-text: #e2e8f0;
-  --link: #5dade2;
+  --link: #d4b76a;
   --shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
@@ -68,7 +68,7 @@
   --chrome-dim: #5a5650;
   --chrome-border: rgba(255,255,255,0.06);
   --chrome-hover: rgba(255,255,255,0.06);
-  --chrome-accent: #2980B9;
+  --chrome-accent: #c8a55c;
   --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-body: 'Source Sans 3', -apple-system, sans-serif;
   --font-scale: 1;
@@ -116,7 +116,7 @@ a { color: var(--link); }
   font-size: 0.9rem; text-decoration: none; border-radius: 8px;
   transition: background 0.2s;
 }
-.gate-btn:hover { background: #5dade2; }
+.gate-btn:hover { background: #d4b76a; }
 .gate-spinner {
   width: 40px; height: 40px; border: 3px solid #222;
   border-top-color: var(--chrome-accent); border-radius: 50%;
@@ -207,7 +207,7 @@ a { color: var(--link); }
 .toc-link.active {
   color: var(--chrome-accent); font-weight: 600;
   border-left-color: var(--chrome-accent);
-  background: rgba(41,128,185,0.06);
+  background: rgba(200,165,92,0.06);
 }
 .toc-link .toc-num {
   font-family: var(--font-heading); font-size: 0.7rem; font-weight: 700;
@@ -243,23 +243,13 @@ a { color: var(--link); }
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
 }
-.cover-hero::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px; height: 300px;
-  border: 2px solid rgba(41,128,185,0.15);
-  border-radius: 50%;
+.cover-hero img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.35; filter: grayscale(30%);
 }
-.cover-hero::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 480px; height: 480px;
-  border: 1px solid rgba(41,128,185,0.08);
-  border-radius: 50%;
+.cover-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.8) 60%, rgba(10,10,10,0.95) 100%);
 }
 .cover-content {
   position: relative; z-index: 1; text-align: center; padding: 3rem 2rem;
@@ -276,7 +266,7 @@ a { color: var(--link); }
 .cover-divider { width: 60px; height: 2px; background: var(--chrome-accent); margin: 0 auto 1rem; }
 .cover-subtitle {
   font-family: var(--font-heading); font-size: 1rem; font-weight: 600;
-  color: #5dade2;
+  color: #c8a55c;
 }
 .cover-tagline {
   font-family: var(--font-body); font-size: 0.9rem; font-style: italic;
@@ -339,7 +329,7 @@ a { color: var(--link); }
 .chapter-content strong, .chapter-content b {
   font-weight: 600; color: var(--heading2);
 }
-.chapter-content a { color: var(--link); text-decoration-color: rgba(41,128,185,0.3); }
+.chapter-content a { color: var(--link); text-decoration-color: rgba(200,165,92,0.3); }
 .chapter-content a:hover { text-decoration-color: var(--link); }
 
 /* Level intro (italic) */
@@ -459,15 +449,6 @@ a { color: var(--link); }
   color: var(--accent); margin: 1.5rem 0 0.25rem;
 }
 
-/* Priority list */
-.priority-list {
-  list-style: none; padding: 0; margin: 0.5rem 0 1rem;
-}
-.priority-list li {
-  padding: 0.2rem 0 0.2rem 1.25rem; font-size: 0.95rem;
-  line-height: 1.6;
-}
-
 /* Closing section */
 .closing {
   text-align: center; padding: 3rem 0 1rem;
@@ -533,7 +514,7 @@ a { color: var(--link); }
   pointer-events: none;
 }
 #back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-#back-to-top:hover { background: #5dade2; }
+#back-to-top:hover { background: #d4b76a; }
 #back-to-top svg {
   width: 20px; height: 20px; stroke: currentColor; fill: none;
   stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
@@ -658,10 +639,12 @@ a { color: var(--link); }
 
 /* ===== PRINT — A4 book pagination ===== */
 @media print {
+  /* Hide all reader chrome */
   #toolbar, #toc-sidebar, #toc-overlay, #progress-bar,
   #settings-panel, #download-panel, #back-to-top,
   #auth-gate, #toast { display: none !important; }
 
+  /* Reset layout to normal document flow */
   html, body {
     overflow: visible !important; height: auto !important;
     background: white !important; color: #222 !important;
@@ -672,15 +655,17 @@ a { color: var(--link); }
   #content-area { overflow: visible !important; height: auto !important; background: white !important; }
   .book-section { border-bottom: none !important; }
 
+  /* A4 page setup */
   @page { size: A4; margin: 2.2cm 2cm 2.5cm 2cm; }
   @page :first { margin: 0; }
 
+  /* ---- Cover page ---- */
   #cover { page-break-after: always; }
   .cover-hero {
     min-height: 0 !important; padding: 6cm 2cm 3cm !important;
     background: transparent !important;
   }
-  .cover-hero::before, .cover-hero::after { display: none !important; }
+  .cover-hero > img, .cover-overlay { display: none !important; }
   .cover-content { position: static !important; }
   .cover-label { color: #000 !important; font-size: 12pt !important; }
   .cover-title { color: #000 !important; font-size: 30pt !important; }
@@ -696,6 +681,7 @@ a { color: var(--link); }
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
 
+  /* ---- Frontmatter ---- */
   #frontmatter { page-break-after: always; }
   .title-page { min-height: auto !important; padding: 4cm 0 2cm !important; page-break-after: always; }
   .title-page h1 { color: #000 !important; font-size: 24pt !important; }
@@ -710,6 +696,7 @@ a { color: var(--link); }
   .disclaimer h2 { color: #555 !important; }
   .disclaimer p { color: #555 !important; }
 
+  /* ---- Chapter openers ---- */
   .chapter-opener {
     page-break-before: always;
     background: transparent !important;
@@ -725,6 +712,7 @@ a { color: var(--link); }
   .chapter-opener .ch-subtitle { color: #555 !important; }
   #frontmatter .chapter-opener { display: none !important; }
 
+  /* ---- Chapter content ---- */
   .chapter-content {
     max-width: none !important; padding: 0.8cm 0 1cm !important;
     font-size: 11pt !important;
@@ -736,12 +724,14 @@ a { color: var(--link); }
   .chapter-content a { color: #333 !important; text-decoration: underline !important; }
   .ex-video a::before { content: '' !important; }
 
+  /* ---- Level intro ---- */
   .level-intro {
     background: #f5f5f5 !important; border-left: 3px solid #999 !important;
     color: #444 !important; border-radius: 0 !important;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
 
+  /* ---- Exercise blocks ---- */
   .exercise-block {
     break-inside: avoid !important; page-break-inside: avoid !important;
     border: 1px solid #ccc !important; border-radius: 0 !important;
@@ -749,6 +739,7 @@ a { color: var(--link); }
   }
   .exercise-block h3 { color: #444 !important; }
 
+  /* ---- Prescription boxes ---- */
   .ex-box {
     background: #f5f5f5 !important; border: 1px solid #ddd !important;
     border-radius: 0 !important;
@@ -756,12 +747,14 @@ a { color: var(--link); }
   }
   .ex-rx { color: #222 !important; }
 
+  /* ---- Images ---- */
   .exercise-img, .exercise-sequence {
     break-inside: avoid !important; page-break-inside: avoid !important;
   }
   .exercise-img img, .exercise-sequence img { max-height: 8cm !important; }
   .exercise-img-tall { max-width: 5cm !important; }
 
+  /* ---- Table ---- */
   .bench-table {
     break-inside: avoid !important; page-break-inside: avoid !important;
   }
@@ -772,23 +765,27 @@ a { color: var(--link); }
   .bench-table td { color: #333 !important; }
   .bench-table td:first-child { color: #333 !important; font-weight: 700 !important; }
 
+  /* ---- Callout ---- */
   .callout {
     background: #f5f5f5 !important; border-left: 3px solid #999 !important;
     color: #333 !important; border-radius: 0 !important;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
 
+  /* ---- Graduation box ---- */
   .grad-box {
     break-inside: avoid !important;
     border: 2px solid #444 !important; border-radius: 0 !important;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
 
+  /* ---- Accent HR ---- */
   .accent-hr {
     background: #444 !important;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
 
+  /* ---- Closing ---- */
   .closing { padding-top: 3cm !important; }
   .closing .cl-main { color: #000 !important; }
   .closing .cl-sub { color: #555 !important; }
@@ -826,7 +823,7 @@ a { color: var(--link); }
       </button>
     </div>
     <div class="toolbar-title-area">
-      <span class="toolbar-chapter" id="toolbar-chapter">The Muscle Up</span>
+      <span class="toolbar-chapter" id="toolbar-chapter">The Ring Muscle Up</span>
       <span class="toolbar-sub" id="toolbar-sub">The Complete Training Guide</span>
     </div>
     <div class="toolbar-right">
@@ -901,11 +898,11 @@ a { color: var(--link); }
         <a href="#loading" class="toc-link" data-section="loading">Loading &amp; Deloading</a>
         <a href="#workouts" class="toc-link" data-section="workouts">The Workouts</a>
         <a href="#level-1" class="toc-link toc-link-sub" data-section="level-1"><span class="toc-num">01</span> Level 1 — Foundation</a>
-        <a href="#level-2" class="toc-link toc-link-sub" data-section="level-2"><span class="toc-num">02</span> Level 2 — Upside Down</a>
-        <a href="#level-3" class="toc-link toc-link-sub" data-section="level-3"><span class="toc-num">03</span> Level 3 — Balance</a>
-        <a href="#level-4" class="toc-link toc-link-sub" data-section="level-4"><span class="toc-num">04</span> Level 4 — The Hold</a>
-        <a href="#level-5" class="toc-link toc-link-sub" data-section="level-5"><span class="toc-num">05</span> Level 5 — Endurance</a>
-        <a href="#level-6" class="toc-link toc-link-sub" data-section="level-6"><span class="toc-num">06</span> Level 6 — 60 Seconds</a>
+        <a href="#level-2" class="toc-link toc-link-sub" data-section="level-2"><span class="toc-num">02</span> Level 2 — Pull &amp; Push</a>
+        <a href="#level-3" class="toc-link toc-link-sub" data-section="level-3"><span class="toc-num">03</span> Level 3 — False Grip</a>
+        <a href="#level-4" class="toc-link toc-link-sub" data-section="level-4"><span class="toc-num">04</span> Level 4 — Eccentric</a>
+        <a href="#level-5" class="toc-link toc-link-sub" data-section="level-5"><span class="toc-num">05</span> Level 5 — First MU</a>
+        <a href="#level-6" class="toc-link toc-link-sub" data-section="level-6"><span class="toc-num">06</span> Level 6 — Conditioning</a>
       </nav>
     </aside>
 
@@ -917,12 +914,14 @@ a { color: var(--link); }
      ============================================================ -->
 <section id="cover" class="book-section">
   <div class="cover-hero">
+    <img src="assets/images/coverpage.png" alt="">
+    <div class="cover-overlay"></div>
     <div class="cover-content">
       <span class="cover-label">THE</span>
-      <div class="cover-title">HANDSTAND</div>
+      <div class="cover-title">RING MUSCLE UP</div>
       <div class="cover-divider"></div>
       <div class="cover-subtitle">The Complete Training Guide</div>
-      <div class="cover-tagline">From Zero to 60-Second Freestanding Hold</div>
+      <div class="cover-tagline">From Your First Ring Hang to a Clean, Strict Muscle Up</div>
       <div class="cover-brand">
         <div class="cover-brand-line"></div>
         <span>The Bodyweight Gym</span>
@@ -937,20 +936,21 @@ a { color: var(--link); }
 <section id="frontmatter" class="book-section">
   <div class="chapter-content">
     <div class="title-page">
-      <h1>THE HANDSTAND</h1>
+      <h1>THE RING MUSCLE UP</h1>
       <div class="accent-rule"></div>
       <div class="subtitle">The Complete Training Guide</div>
-      <div class="tagline">From Zero to 60-Second Freestanding Hold</div>
+      <div class="tagline">From Your First Ring Hang to a Clean, Strict Muscle Up</div>
       <div class="author">The Bodyweight Gym</div>
-      <div class="edition">Second Edition</div>
+      <div class="edition">Version 1</div>
     </div>
     <hr class="accent-hr">
     <div class="disclaimer">
       <h2>Disclaimer</h2>
       <div class="disclaimer-rule"></div>
-      <p>Before starting any exercise programme, consult a qualified fitness or sports professional to ensure this programme is suitable for you. Do not undertake training with The Bodyweight Gym without professional or qualified instruction on proper technique. Use common sense when training and understand your personal limitations.</p>
-      <p>Any programme involving resistance training, gymnastics, or activities at height is potentially dangerous and could lead to severe injury. The user assumes all risks and responsibilities for injuries which may occur during or following use of this programme. The Bodyweight Gym cannot be held responsible for any injuries which may occur as a result of training with this programme.</p>
-      <p>The Bodyweight Gym and the buyer disclaim any express or implied warranty, including, but not limited to, warranties of merchantability or fitness for a particular purpose. The buyer assumes all liability in use of this programme.</p>
+      <p>Before starting any exercise program, you should consider consulting a qualified fitness or sports adviser to ensure the program is suitable for you. Do not undertake training with The Bodyweight Gym without professional or qualified instruction on proper uses and appropriate techniques. Use common sense when training and understand your personal limitations.</p>
+      <p>Any program involving resistance training, gymnastics training and/or activities at height is potentially dangerous and could lead to severe injury or death. The user assumes all risks and responsibilities for injuries or death which may occur during or following use of this equipment in any manner whatsoever. The Bodyweight Gym cannot be held responsible for any injuries which may occur as a result of training with this program or the associated equipment.</p>
+      <p>The Bodyweight Gym and buyer disclaim any express or implied warranty, including, but not limited to, warranties of merchantability or fitness for a particular purpose. Buyer assumes all liability in use of this program.</p>
+      <p>The Bodyweight Gym advocates the learning of skills with strict movements.</p>
       <div class="copyright">
         <p>© The Bodyweight Gym. All rights reserved.</p>
         <p>No part of this publication may be reproduced without written permission.</p>
@@ -968,26 +968,30 @@ a { color: var(--link); }
   </div>
   <div class="chapter-content">
     <div class="exercise-img exercise-img-wide">
-      <img src="assets/images/freestandinghandstand1.png" alt="Freestanding handstand">
+      <img src="assets/images/coverpage.png" alt="The Ring Muscle Up — The Complete Training Guide">
     </div>
 
-    <p>The handstand is the art of standing still on your hands with straight arms and your entire body stacked vertically above your base of support. At first glance it may appear simple. In practice, most people discover the handstand to be one of the most challenging expressions of strength, mobility, focus, and balance that an adult can pursue.</p>
+    <p>The ring muscle up is an exercise that involves moving from below a set of rings to the support position above a set of rings. In the sport of gymnastics it's called getting on the rings and isn't even a thing. For many fitness enthusiasts the ring muscle up is a highly sought-after expression of strength and mobility.</p>
 
-    <p>Learning the handstand requires a deliberate combination of skill work and physical conditioning. Most adults need to rebuild overhead shoulder mobility, develop the upper-body strength required to support themselves inverted for extended periods, and then — only then — learn to balance. This guide will walk you through each phase systematically.</p>
+    <p>Often the ring muscle up is referred to as a skill. I prefer to think of the ring muscle up as an expression of strength and mobility. Skill exercises are difficult to develop and often require elements that are harder to train, such as balance or novel movement (e.g. press handstand). The ring muscle up contains neither of these things. It is easy to learn with a solid series of progressions, hard work and persistence.</p>
 
-    <p>The programme is structured across six progressive levels. Each level has a clear graduation test. To progress smoothly and safely, satisfy each graduation requirement before moving on. Skipping levels is the fastest way to stall — or get injured.</p>
+    <p>This guide will break down your ring muscle up progression into 6 different levels. Each level will have a graduation testing requirement. In order to progress smoothly, I strongly recommend that you satisfy each graduation test before progressing to the next level.</p>
 
-    <p><b>What does "a handstand" mean in this guide?</b> It means standing on your hands with locked-out elbows, shoulders fully elevated, body aligned and motionless, for a minimum of 60 seconds.</p>
+    <p>For many people the ring muscle up presents both a mobility and strength challenge. If you are reading this guide it is likely that you will have to get stronger and develop more mobility to complete a ring muscle up.</p>
 
-    <p><b>How long will this take?</b> The honest answer: anywhere from 6 months to 2 years for the average adult. Progress demands consistent effort — training 4 to 7 days per week for at least 30 minutes a day. There are no shortcuts.</p>
+    <p>For the sake of clarity, by referring to a ring muscle up I mean a strict ring muscle up, with minimal pike in the hips and no momentum generated by swinging or kipping.</p>
 
-    <h2 class="section-title">The Kinetic Chain</h2>
+    <p>The most common question I hear is — "How long will it take?" This is impossible to answer; it depends entirely on your current and historic strength and mobility level. If you learn to use the gymnastic rings as a child you will redevelop the movement faster than an adult with limited or no exposure to this kind of upper body strength training.</p>
 
-    <p>The handstand demands that your back, shoulders, upper arms, forearms, wrists, and fingers all function as a single integrated unit. Your connective tissue — tendons, ligaments, and joint capsules — must adapt alongside your muscles.</p>
+    <p>The ring muscle up demands strength, and is expressed through the entire upper body chain. It requires the back, shoulders, upper and lower arms to function together. If you have spent time training these muscles in isolation you may need to step back and assess and strengthen any weak links in the chain. It is likely that your shoulder and elbow joints and the associated connective tissue will need to strengthen and improve.</p>
 
-    <p>This is critical: different tissues adapt at very different rates. Muscles remodel in roughly 3 months. Tendons and ligaments take approximately 9 months. Bone remodels over 14 to 15 months. If your muscles are getting strong but your wrists are in pain, the message is clear — slow down.</p>
+    <p>The goal of training for the ring muscle up (and all strength training) is to stress your body such that you can recover within a few days, then do it again. If you stress your body too much this is called an injury. Injuries may occur if you train for long enough, but with an appreciation for strength training basics you can minimize the risk of injury. You can only progress as fast as the weakest link in the chain you are aiming to strengthen.</p>
 
-    <p class="callout">The goal of training is to stress your body enough that it adapts, then allow adequate recovery. If you exceed your body's capacity to recover, the result is injury. You can only progress as fast as the weakest link in the chain.</p>
+    <h2 class="section-title">Soft tissue adaptation</h2>
+
+    <p>Muscles replace themselves approximately every 3 months. Tendons and ligaments replace themselves approximately every 9 months and bone replaces itself every 14–15 months. So if you are getting strong and your elbows are killing you — slow down. Your elbow joint can't keep up with the rate of progress.</p>
+
+    <p>Training for your ring muscle up should be no more than once every 2 days. Give yourself time to recover between efforts. If you are training intensely or very regularly take a planned deload week every 5 weeks. In a deload week you will still train however you will only complete 1 set of everything rather than the usual volume.</p>
   </div>
 </section>
 
@@ -999,7 +1003,7 @@ a { color: var(--link); }
     <h1>Benchmarking</h1>
   </div>
   <div class="chapter-content">
-    <p>If you are completely new to handstand training, begin at Level 1. If you have some experience, use the tests below to find the appropriate starting level. Be honest — starting too high is worse than starting too low.</p>
+    <p>If you are completely new to training upper body strength you will begin at Level 1. However if you have some experience in training upper body strength you will first need to figure out what level is appropriate to you. Use this benchmarking test to find an appropriate level:</p>
 
     <table class="bench-table">
       <thead>
@@ -1007,11 +1011,10 @@ a { color: var(--link); }
       </thead>
       <tbody>
         <tr><td>1</td><td>Zero experience or unsure.</td></tr>
-        <tr><td>2</td><td>Protracted plank 1 min, hang 1 min, body-line drill 30 sec. 5 sets of each, relatively easy.</td></tr>
-        <tr><td>3</td><td>Chest-to-wall handstand 1 min, hang 1 min, hollow body 1 min. 5 sets of each, relatively easy.</td></tr>
-        <tr><td>4</td><td>Can find freestanding balance consistently for 3–5 seconds.</td></tr>
-        <tr><td>5</td><td>Can kick up and hold balance consistently for 10–15 seconds.</td></tr>
-        <tr><td>6</td><td>Have a handstand but have not yet achieved a 60-second hold.</td></tr>
+        <tr><td>2</td><td>3 × pull ups, 3 × bar dips.</td></tr>
+        <tr><td>3</td><td>Experience with false grip, 3 × false grip pull ups, 3 × ring dips.</td></tr>
+        <tr><td>4</td><td>Reasonably comfortable with false grip, 5 × false grip pull ups, 5 × ring dips.</td></tr>
+        <tr><td>5</td><td>Can do a ring muscle up but want to clean it up.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1027,21 +1030,21 @@ a { color: var(--link); }
     <div class="ch-subtitle">and How to Progress</div>
   </div>
   <div class="chapter-content">
-    <p>Your training should be structured in repeating blocks of effort and recovery. This approach gives your body enough stress to grow and enough time to adapt.</p>
+    <p>Your training should be planned and arranged in blocks of effort. The following is an example of how you can train and recover such that you give your body enough stress to grow and enough time to recover.</p>
 
-    <h3 class="block-heading">Block 1 — Establish Your Baseline</h3>
-    <p>Pick a level and set range appropriate to your current strength. If in doubt, be conservative — an injury is always the worst outcome. Train hard for 4 weeks. Take the 5th week completely off.</p>
+    <h3 class="block-heading">Block 1</h3>
+    <p>Pick a level and a set range that is appropriate to your current strength and endurance. If in doubt be more conservative. An injury is the worst outcome. Work hard for 4 weeks. Take the 5th week off as stated above.</p>
 
-    <h3 class="block-heading">Block 2 — Add Volume</h3>
-    <p>Add one set to each exercise. Train hard for 4 weeks. Take the 5th week off. Repeat until you reach the upper set range for your level.</p>
+    <h3 class="block-heading">Block 2</h3>
+    <p>Add a set to each exercise you completed in block 1. Work hard for 4 weeks. Take the 5th week off. Repeat this process of loading, deloading and adding volume until you have reached the upper set range prescribed for your workout.</p>
 
-    <h3 class="block-heading">Block 3 — Test and Progress</h3>
-    <p>Test against the graduation requirements for the next level. If you meet the criteria, begin the next level at the lower set range.</p>
+    <h3 class="block-heading">Block 3</h3>
+    <p>Test yourself for the next level entry requirements (refer Benchmarking section). If you are now capable of the next level, begin the process again with the next level of exercise, slowly increasing volume over 5 week cycles.</p>
 
-    <h3 class="block-heading">Block 4 — Continue the Cycle</h3>
-    <p>Keep developing your programme. The cycle of progressive overload followed by recovery is the fundamental engine of adaptation.</p>
+    <h3 class="block-heading">Block 4</h3>
+    <p>Continue developing your training program based on your progress.</p>
 
-    <p class="callout">Learning a handstand from scratch will likely take more than 12 months. Patience is not optional — it is the defining characteristic of everyone who succeeds.</p>
+    <p class="callout">Remember: Learning a muscle up from scratch may take more than 12 months, so patience is key.</p>
   </div>
 </section>
 
@@ -1053,8 +1056,8 @@ a { color: var(--link); }
     <h1>The Workouts</h1>
   </div>
   <div class="chapter-content">
-    <p>This programme offers 6 different levels in order to safely progress you from zero experience to a clean, 60-second freestanding handstand. Each level requires you to possess greater strength, mobility, and balance. Be conservative and start with a level that is achievable. If you find you are not progressing at a particular level, drop back to the previous level for one block of training before moving forward again.</p>
-    <p>Before each workout, warm yourself up adequately. 5–10 minutes of any light cardio of your choice — anything to get a light sweat on.</p>
+    <p>This workout program offers 6 different levels in order to safely progress you from the beginning to a clean, safe, strict ring muscle up. Each level requires you to possess greater strength and mobility. Be conservative and start with a level that is achievable. If you find you are not progressing at a particular level, drop back to the previous level for 1 block of training before moving forward again.</p>
+    <p>Before each workout, be sure to warm yourself up adequately. 5–10 minutes of any light cardio, running or skipping etc of your choice. Anything to get a light sweat on.</p>
   </div>
 </section>
 
@@ -1065,108 +1068,87 @@ a { color: var(--link); }
   <div class="chapter-opener">
     <h1>Level 1</h1>
     <div class="ch-accent"></div>
-    <div class="ch-subtitle">Building the Foundation</div>
+    <div class="ch-subtitle">Foundation</div>
   </div>
   <div class="chapter-content">
-    <p class="level-intro">You are at the very beginning. This level focuses on developing wrist strength, shoulder mobility, and core stability. Do not rush. The work you do here will determine how smoothly you advance through every subsequent level.</p>
-
-    <p class="text-small"><b>Training frequency:</b> 4–7 days per week, 30–45 minutes per session. Warm up for 5–10 minutes with light cardio before each session. Rest 60–90 seconds between sets unless otherwise noted.</p>
+    <p class="level-intro">As a level 1 athlete you are right at the beginning of developing bent arm strength. This is something that should not be rushed. Everyone will progress at their own rate. Do the work necessary to make this level feel easy before progressing to level 2. This workout is all about developing wrist strength and mobility, shoulder extension and basic pushing and pulling strength.</p>
 
     <h2 class="section-title">Mobility work</h2>
 
     <div class="exercise-block">
-      <h3>Wrist Heel Raises</h3>
-      <p class="exercise-sequence-caption">Start → Raise → Hold (last rep 10 sec)</p>
-      <div class="exercise-sequence exercise-sequence-3">
-        <img src="assets/images/wrist01.png" alt="Wrist heel raises — start">
-        <img src="assets/images/wrist03.png" alt="Wrist heel raises — raise">
-        <img src="assets/images/writs02.png" alt="Wrist heel raises — hold">
-      </div>
-      <p>Kneel with your hands flat on the floor, fingers pointing forward. Slowly lift the heels of your hands off the ground while keeping your fingertips pressed down, then lower back to flat. On the final rep, hold the raised position for 10 seconds.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10, hold last rep (HLR) 10 seconds</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=Uo4qAzodPlM&t=14s" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Fin Push-ups</h3>
+      <h3>False grip stretch</h3>
       <div class="exercise-img">
-        <img src="assets/images/finpushups.png" alt="Fin push-ups — start and lowered (fin) position">
+        <img src="assets/images/fgringstretch.png" alt="False grip stretch on rings">
       </div>
-      <p>From the same kneeling position, place your hands flat on the floor with your <strong>fingers pointing out to the sides</strong> (perpendicular to your body), so your wrists are flexed and your palms stay down. Perform small push-up motions, letting your <strong>elbows flare out wide</strong> as you lower — this creates the “fin” shape. Lower your chest toward the floor, then press back up. On the final rep, hold the top position for 10 seconds. Superset with wrist heel raises.</p>
+      <p>False grip requires flexibility through the back of the forearm (extensors) and strength through the inside of the forearm (for gripping). This mobility exercise will develop the required strength and mobility to become comfortable in false grip.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: × 10, HLR 10 seconds<br>Sets: 3–5 supersets (with wrist heel raises)</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=Uo4qAzodPlM&t=14s" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-rx">Reps: × 10, hold last rep (HLR) 10 seconds<br>Sets: 3–5</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=fPrirk5JELI" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
     <div class="exercise-block">
-      <h3>Desk Stretch — External Rotation</h3>
+      <h3>Arm extension stretch</h3>
       <div class="exercise-img">
-        <img src="assets/images/overheaddeskstretch01.png" alt="Desk stretch — external rotation">
+        <img src="assets/images/armExtensionStretch.png" alt="Arm extension stretch">
       </div>
-      <p>Kneel behind a desk or sturdy surface at roughly hip height. Place your hands on the surface with your palms facing the ceiling (externally rotated). Pulse in and out 10 times, then sink as deep as comfortable and hold for 1 to 2 minutes.</p>
+      <p>The transition phase of a muscle up, moving from the top of the pull up to the bottom of the dip, requires the upper arms to move strongly into extension. For many people this range of motion is lacking. This stretch will build the required mobility to stay safe while practicing ring muscle ups.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 pulses, then hold 1–2 minutes</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=Toe5JOHztek" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Overhead Desk Stretch</h3>
-      <p class="exercise-sequence-caption">Start (arms extended) → Sink (chest through arms)</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/overheaddeskstretch01.png" alt="Overhead desk stretch — start">
-        <img src="assets/images/overheaddeskstretch02.png" alt="Overhead desk stretch — sink">
-      </div>
-      <p>Kneel behind the same surface and place your hands on it with arms extended overhead, palms down. Pulse gently 10 times, then sink your chest through your arms and hold for 1 to 2 minutes. This directly targets overhead shoulder mobility.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 pulses, then hold 1–2 minutes</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=G4wqA_e9r3I" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-rx">Reps: × 5 per side, HLR per side 10 seconds<br>Sets: 3–5</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=85yAKJCn5sg" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
     <h2 class="section-title">Strength work</h2>
 
     <div class="exercise-block">
-      <h3>Hang</h3>
+      <h3>Ring hang</h3>
       <div class="exercise-img exercise-img-tall">
-        <img src="assets/images/hang.png" alt="Dead hang from bar">
+        <img src="assets/images/ringhang.png" alt="Ring hang">
       </div>
-      <p>Hang from a pull-up bar using any grip. Build toward a 1-minute dead hang. If you cannot hold initially, accumulate 60 seconds across multiple shorter holds.</p>
+      <p>Hanging is the fundamental strength expression needed to build more powerful movements such as pull ups and eventually muscle ups. While simple, even the shortest periods of time hanging from a set of rings will challenge most people. Keep this one simple. Hold the rings, feet off the ground, don't let go.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: Accumulate 1 minute (build to unbroken)<br>Sets: 3–5 sets (stretches + hang combined)</div>
+        <div class="ex-rx">Reps: 1 minute hang<br>Sets: Complete 3–5 sets of false grip stretch, arm extension stretch and ring hang</div>
       </div>
     </div>
 
     <div class="exercise-block">
-      <h3>Protracted Plank</h3>
-      <p class="exercise-sequence-caption">Full version → Beginner (knees down)</p>
+      <h3>False grip</h3>
+      <div class="exercise-img exercise-img-tall">
+        <img src="assets/images/fgringhang.png" alt="False grip on rings">
+      </div>
+      <p>False grip is a method of holding the rings (or bar) that places your wrist on top of the ring. It requires your wrist to bend at 90 degrees while still being able to grip the ring with your fingers. Yes it hurts your wrists. They will toughen. It takes a long time to become comfortable with false grip. Take your time. Chalking the heel of the hand and wrist where primary contact is made with the rings will make it easier.</p>
+      <div class="ex-box">
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=C1tIcRAsKLc" target="_blank" rel="noopener">Watch demonstration</a></div>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <h3>False grip ring rows</h3>
+      <p class="exercise-sequence-caption">Start (lean back) → Middle (thumbs to chest)</p>
       <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/protractedplank.png" alt="Protracted plank">
-        <img src="assets/images/protractedplankbeginer.png" alt="Protracted plank — beginner on knees">
+        <img src="assets/images/ringrowtransistionbottom.png" alt="False grip ring row — start, arms extended">
+        <img src="assets/images/ringrowtransitionmiddle.png" alt="False grip ring row — middle, thumbs to chest">
       </div>
-      <p>Hands under shoulders, elbows locked. Protract your shoulders — spread your shoulder blades apart, pushing your ribcage away from the floor. Tuck your pelvis posteriorly and engage your abdominals. Regress to knees if needed.</p>
+      <p>Hold the rings in false grip, lean back holding the rings at arm's length. Maintain false grip. Row the rings in towards your body pulling until your thumbs touch your chest. Return to the straight arm position slowly. If you find it too hard to complete all the reps walk backwards to reduce the resistance.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: Accumulate 1 minute<br>Sets: 3–5 sets, 1 min work / 1 min rest</div>
+        <div class="ex-rx">Reps: × 15<br>Sets: Complete 3–5 sets of 15 × false grip ring rows and 15 × ring push ups</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=wC5LeDNJ1ro" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
     <div class="exercise-block">
-      <h3>Body-Line Drill</h3>
-      <div class="exercise-img">
-        <img src="assets/images/bodylinedrill.png" alt="Body-line drill — prone hold, arms overhead, full-body tension">
+      <h3>Ring push ups with turn out</h3>
+      <p class="exercise-sequence-caption">Bottom (ring to shoulder) → Top (lockout, then turn out)</p>
+      <div class="exercise-sequence exercise-sequence-2">
+        <img src="assets/images/ringpushupbottom.png" alt="Ring push up — bottom, ring to shoulder">
+        <img src="assets/images/ringpushuptop.png" alt="Ring push up — top, turn out">
       </div>
-      <p>Lie face-down, arms overhead. Simultaneously lift arms, chest, and legs off the floor. Squeeze your glutes, point your toes, and hold full-body tension. This teaches the global tension required for a handstand.</p>
+      <p>Hold yourself in a plank position supported on the rings in front of you. Keeping your elbows in tight, lower down to the bottom position until the ring touches your shoulder. Push back up to the beginning position and externally rotate the rings for a moment.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: Hold 30 seconds (build to 1 minute)<br>Sets: 3–5 sets, 1 min work / 1 min rest</div>
+        <div class="ex-rx">Reps: × 15</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=rLTVcV6KlQ8" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
-    </div>
-
-    <div class="grad-box">
-      <div class="grad-check">✓</div>
-      <div class="grad-text">Level 1 Graduation: Complete 5 sets of protracted plank 1 min, hang 1 min, and body-line drill 30 sec. All sets should feel relatively comfortable.</div>
     </div>
   </div>
 </section>
@@ -1178,70 +1160,69 @@ a { color: var(--link); }
   <div class="chapter-opener">
     <h1>Level 2</h1>
     <div class="ch-accent"></div>
-    <div class="ch-subtitle">Going Upside Down</div>
+    <div class="ch-subtitle">Pull &amp; Push</div>
   </div>
   <div class="chapter-content">
-    <p class="level-intro">You have baseline strength and mobility. Now you begin inverting, loading significantly more weight into shoulders, arms, and wrists. Take particular care of your wrists — if a movement causes sharp pain, scale back immediately.</p>
+    <p class="level-intro">As a level 2 athlete you now have some strength in bent arm pulling and pushing. You should feel comfortable performing a pull up or a dip. As you progress your strength pay attention to how your shoulders and elbows feel. If they begin to hurt or feel less than great, consider dropping back to level 1 to build a larger foundation.</p>
 
     <h2 class="section-title">Mobility work</h2>
-
-    <div class="exercise-block">
-      <h3>Wrist Heel Raises + Fin Push-ups</h3>
-      <div class="exercise-img">
-        <img src="assets/images/finpushups.png" alt="Wrist heel raises + Fin push-ups — continue as Level 1">
-      </div>
-      <p>Continue as per Level 1.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 each, HLR 10 sec<br>Sets: 3–5 supersets</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=Uo4qAzodPlM&t=14s" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Desk Stretches + Hang</h3>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/overheaddeskstretch01.png" alt="Desk stretches">
-        <img src="assets/images/hang.png" alt="Hang from bar">
-      </div>
-      <p>Continue as per Level 1.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 pulses + 1–2 min hold; 1 min hang<br>Sets: 3–5 sets</div>
-      </div>
-    </div>
+    <p class="text-small">Continue <b>False grip stretch</b> (× 10 HLR 10 sec) and <b>Arm extension stretch</b> (× 5 per side HLR 10 sec) as in Level 1.</p>
 
     <h2 class="section-title">Strength work</h2>
 
     <div class="exercise-block">
-      <h3>Chest-to-Wall Handstand</h3>
-      <p class="exercise-sequence-caption">Walk up → Full hold (chest facing wall)</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/chesttowallhandstand01.png" alt="Chest-to-wall handstand — walk up">
-        <img src="assets/images/chesttowallhandstand02.png" alt="Chest-to-wall handstand — full hold">
+      <h3>False grip hang</h3>
+      <div class="exercise-img exercise-img-tall">
+        <img src="assets/images/fgringhang.png" alt="False grip hang">
       </div>
-      <p>Walk your feet up the wall until your chest faces the wall. Focus on five points: grip the ground; push tall (shoulders touch ears); posterior pelvic tilt; legs pressed together; point toes. Scale to protracted plank hold if needed.</p>
+      <p>This takes the hang as practiced in level one and builds on it by adding false grip. Maintaining false grip is your priority; hang from a set of rings for the prescribed period of time.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: Accumulate 1 minute (build to unbroken)<br>Sets: 3–5 sets, 1 min work / 1 min rest</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=f1yLxNMq23A" target="_blank" rel="noopener">Watch demonstration</a></div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=tfVN5t_QykI" target="_blank" rel="noopener">Watch five focus points</a></div>
+        <div class="ex-rx">Reps: × 30 seconds<br>Sets: Complete 3–5 sets of false grip stretch, arm extension stretch and false grip hang</div>
       </div>
     </div>
 
     <div class="exercise-block">
-      <h3>Hollow Body Hold</h3>
-      <p class="exercise-sequence-caption">Beginner (knees tucked) → Advanced (fully extended)</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/hollowbodyBeginner.png" alt="Hollow body hold — beginner, knees tucked">
-        <img src="assets/images/hollowbodyAdv.png" alt="Hollow body hold — advanced, fully extended">
+      <h3>Transition ring rows</h3>
+      <p class="exercise-sequence-caption">Start (lean back) → Middle (row to chest) → End (rings to armpits, support)</p>
+      <div class="exercise-sequence exercise-sequence-3">
+        <img src="assets/images/ringrowtransistionbottom.png" alt="Transition ring row — start, straight arms">
+        <img src="assets/images/ringrowtransitionmiddle.png" alt="Transition ring row — middle, thumb to chest">
+        <img src="assets/images/ringrowtransitiontop.png" alt="Transition ring row — end, rings in armpits">
       </div>
-      <p><b>Beginner:</b> Lie on your back, tuck your knees, lift your shoulder blades, and press your lower back into the floor. <b>Advanced:</b> Extend arms overhead and legs straight. Maintain lower back contact throughout.</p>
+      <p>This variation of the ring row begins as a false grip ring row and incorporates the transition movement at the top of the row. Begin the movement leaning back holding the rings with straight arms. Row the rings into your body until your thumb touches your chest. At this point drop your hips aggressively at the same time pulling the rings across your chest and into your armpits. Catch your balance with the rings supporting your weight. Reverse this process till you are in the beginning position to complete the movement.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: Accumulate 1 minute<br>Sets: 3–5 sets, 1 min work / 1 min rest</div>
+        <div class="ex-rx">Reps: × 8<br>Sets: Complete 3–5 sets of transition ring rows</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=poBkFVAesrE" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
-    <div class="grad-box">
-      <div class="grad-check">✓</div>
-      <div class="grad-text">Level 2 Graduation: Complete 5 sets of chest-to-wall 1 min, hang 1 min, and hollow body 1 min. All sets should feel relatively comfortable.</div>
+    <div class="exercise-block">
+      <h3>Pull up</h3>
+      <p class="exercise-sequence-caption">Start (dead hang) → Middle (scap set) → End (chin over rings)</p>
+      <div class="exercise-sequence exercise-sequence-3">
+        <img src="assets/images/ringpullupbottom.png" alt="Pull up — start, dead hang">
+        <img src="assets/images/ringpullupscapdownmiddle.png" alt="Pull up — middle, shoulders down and back">
+        <img src="assets/images/ringpulluptop.png" alt="Pull up — end, chin over rings">
+      </div>
+      <p>Holding the rings (or bar) from below, using a normal grip complete a pull up. Begin from a dead hang, depress and retract your shoulder blades (pull your shoulders down). Then bend your elbows pulling your chin over the rings. Return to a dead hang slowly in control to complete the repetition.</p>
+      <div class="ex-box">
+        <div class="ex-rx">Reps: × 5 reps</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=J1tA_KvAa6o" target="_blank" rel="noopener">Watch demonstration</a></div>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <h3>Bar dip</h3>
+      <p class="exercise-sequence-caption">Bottom (dip down) → Top (support, lockout)</p>
+      <div class="exercise-sequence exercise-sequence-2">
+        <img src="assets/images/bardipbottom.png" alt="Bar dip — bottom position">
+        <img src="assets/images/bardiptop.png" alt="Bar dip — top, support position">
+      </div>
+      <p>Using a set of parallel bars, complete bar dips. Begin in a support position with your shoulders depressed (keep your shoulders away from your ears); dip down as low as you can control before pressing back into support position.</p>
+      <div class="ex-box">
+        <div class="ex-rx">Reps: × 5 reps<br>Sets: Complete 3 sets of pull ups and bar dips</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=Cc42gTpLIms" target="_blank" rel="noopener">Watch demonstration</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1253,103 +1234,84 @@ a { color: var(--link); }
   <div class="chapter-opener">
     <h1>Level 3</h1>
     <div class="ch-accent"></div>
-    <div class="ch-subtitle">Learning to Balance</div>
+    <div class="ch-subtitle">False Grip Integration</div>
   </div>
   <div class="chapter-content">
-    <p class="level-intro">You are comfortable upside down and can hold a chest-to-wall handstand with enough ease to have a conversation. It is time to learn balance. This level introduces heel pulls and toe pulls — the fundamental balance-correction tools.</p>
+    <p class="level-intro">As a level 3 athlete you should feel very comfortable with normal pull ups and dips using rings and bars. As you progress to integrating your false grip into higher power expressions of pulling and pushing pay attention to how your wrists and elbows feel. The skin on your wrists will take a beating; you can tolerate this. However if the joints are beginning to hurt or feel less than great, consider spending more time at level 2.</p>
 
     <h2 class="section-title">Mobility work</h2>
+    <p class="text-small">Continue <b>False grip stretch</b> and <b>Arm extension stretch</b> as in Level 1.</p>
+
+    <h2 class="section-title">Strength work</h2>
 
     <div class="exercise-block">
-      <h3>Wrist Heel Raises + Fin Push-ups</h3>
-      <div class="exercise-img">
-        <img src="assets/images/finpushups.png" alt="Wrist heel raises + Fin push-ups — continue as previous levels">
-      </div>
-      <p>Continue as per previous levels.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 each, HLR 10 sec<br>Sets: 3–5 supersets</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=Uo4qAzodPlM&t=14s" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Desk Stretches + Hang</h3>
+      <h3>False grip pull ups</h3>
+      <p class="exercise-sequence-caption">Start (false grip hang) → End (thumbs to chest)</p>
       <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/overheaddeskstretch01.png" alt="Desk stretches">
-        <img src="assets/images/hang.png" alt="Hang from bar">
+        <img src="assets/images/fgringhang.png" alt="False grip pull up — start, false grip hang">
+        <img src="assets/images/fgpulluptop.png" alt="False grip pull up — end, thumbs to chest">
       </div>
-      <p>Continue. You should be completing 1-minute unbroken hangs comfortably by now.</p>
+      <p>Begin the false grip pull up from a false grip hang. Initiate the movement by pulling your shoulders down and back before bending your elbows and pulling yourself up. Continue until your thumbs touch your chest. This range of motion is very important as it sets up the position to complete the transition.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: 1 min unbroken hang<br>Sets: 3–5 sets</div>
+        <div class="ex-rx">Reps: × 5<br>Sets: Complete 3–5 sets of 5 × false grip pull ups and 5 × ring dips</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=5R07lItt9EY" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
-    <h2 class="section-title">Balance work</h2>
-
     <div class="exercise-block">
-      <h3>Heel Pulls</h3>
-      <p class="exercise-sequence-caption">Chest-to-wall → Press fingertips → Feet lighten</p>
+      <h3>Ring dips with turn out</h3>
+      <p class="exercise-sequence-caption">Top (support, rings turned out) → Bottom (rings to shoulder)</p>
       <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/handstandheelpulls01.png" alt="Heel pulls — chest to wall start">
-        <img src="assets/images/handstandheelpulls02.png" alt="Heel pulls — feet lightening">
+        <img src="assets/images/rgmuscledowntop.png" alt="Ring dip — top, support, rings turned out">
+        <img src="assets/images/rgmuscledownbottomdip.png" alt="Ring dip — bottom, rings to shoulder">
       </div>
-      <p>From chest-to-wall, maintain full-body tension and grip the ground. Press through your fingertips. Do not actively pull your feet from the wall — just observe your heels getting lighter as you increase finger pressure. Eventually, your feet float free. This is the foundation of over-balance correction.</p>
+      <p>Begin in support position above the rings with the rings turned out (palms facing forward). As a beginner, make sure you keep the rings very close to your body. The further away from you they move the harder you will have to work. Turn the rings back to parallel and lower down through the dip. Continue until the rings touch your shoulder. For many people this will feel like a very deep dip. From here push back up to support and turn the rings out to finish the rep.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: × 8–12</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=xm26KPUA7OI" target="_blank" rel="noopener">Watch demonstration</a></div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=5t796EGmdn8" target="_blank" rel="noopener">Watch detailed breakdown</a></div>
+        <div class="ex-rx">Reps: × 5</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=wf8tAi6sfps" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
     <div class="exercise-block">
-      <h3>Toe Pulls</h3>
-      <p class="exercise-sequence-caption">Back-to-wall → Shift forward → Feet lighten</p>
-      <div class="exercise-sequence exercise-sequence-3">
-        <img src="assets/images/handstandtoepulls01.png" alt="Toe pulls — back to wall">
-        <img src="assets/images/handstandtoepull02.png" alt="Toe pulls — shift forward">
-        <img src="assets/images/handstandtoepull03.png" alt="Toe pulls — feet lightening">
-      </div>
-      <p>From back-to-wall (toes on wall), maintain tension. Shift your shoulders forward over your wrists while keeping your core locked. Initially, your feet slide down the wall. As you get stronger, they may momentarily leave it. This teaches under-balance correction.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 8–12<br>Sets: 5 sets (heel pulls + toe pulls per set)</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=xm26KPUA7OI" target="_blank" rel="noopener">Watch demonstration</a></div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=IBnOiDCXVKs" target="_blank" rel="noopener">Watch detailed breakdown</a></div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Box-Assisted Balance Game</h3>
-      <p class="exercise-sequence-caption">Set up with box → Find balance → Catch on forearms if needed</p>
-      <div class="exercise-sequence exercise-sequence-3">
-        <img src="assets/images/boxassistedhandstand01.png" alt="Box-assisted balance — setup">
-        <img src="assets/images/boxassistedhandstand02.png" alt="Box-assisted balance — finding balance">
-        <img src="assets/images/boxassistedhandstand03.png" alt="Box-assisted balance — forearm catch">
-      </div>
-      <p>This exercise brings together your heel and toe pull skills. Place a box in front for forearm catches if you overbalance. Set a 10-minute timer. Accumulate holds of increasing duration — start at 3 seconds. Once you can hit 15 holds at 3 seconds, increase to 4 seconds. Continue building until 10-second holds are repeatable.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: 10-minute practice block</div>
-        <div class="ex-video"><a href="https://youtu.be/huCWZYfvVYY" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-      <p class="callout">This is where the handstand starts to come together. Be patient.</p>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Chest-to-Wall Handstand</h3>
-      <p class="exercise-sequence-caption">Walk up → Full hold (chest facing wall)</p>
+      <h3>Bent arm false grip hang</h3>
+      <p class="exercise-sequence-caption">Get to position (thumbs to chest) → Hold (feet off ground)</p>
       <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/chesttowallhandstand01.png" alt="Chest-to-wall handstand — walk up">
-        <img src="assets/images/chesttowallhandstand02.png" alt="Chest-to-wall handstand — full hold">
+        <img src="assets/images/fgpulluptop.png" alt="Bent arm hang — pull or jump to thumbs to chest">
+        <img src="assets/images/rgmuscledowndiptransition.png" alt="Bent arm hang — hold, feet off ground">
       </div>
-      <p>Continue as per Level 2.</p>
+      <p>For most people the pull up is hardest when your hands get close to touching your body. This exercise is in place to strengthen this range of motion. Pull up, or jump up into position such that your thumbs touch your chest. Hold this position with your feet off the ground.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: 1 min unbroken<br>Sets: 3–5 sets</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=f1yLxNMq23A" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-rx">Reps: 10 second hold<br>Sets: 5 sets with 1 minute rest between each repetition</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=3PbCufQo_Yc&t=2s" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
-    <div class="grad-box">
-      <div class="grad-check">✓</div>
-      <div class="grad-text">Level 3 Graduation: Can find freestanding balance consistently for 3 to 5 seconds.</div>
+    <div class="exercise-block">
+      <h3>False grip ring rows</h3>
+      <p class="exercise-sequence-caption">Start (lean back) → Middle (thumbs to chest)</p>
+      <div class="exercise-sequence exercise-sequence-2">
+        <img src="assets/images/ringrowtransistionbottom.png" alt="False grip ring row — start, arms extended">
+        <img src="assets/images/ringrowtransitionmiddle.png" alt="False grip ring row — middle, thumbs to chest">
+      </div>
+      <p>Hold the rings in false grip, lean back holding the rings at arm's length. Maintain false grip. Row the rings in towards your body pulling until your thumbs touch your chest. Return to the straight arm position slowly.</p>
+      <div class="ex-box">
+        <div class="ex-rx">Reps: × 15</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=wC5LeDNJ1ro" target="_blank" rel="noopener">Watch demonstration</a></div>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <h3>Ring push ups with turn out</h3>
+      <p class="exercise-sequence-caption">Bottom (ring to shoulder) → Top (lockout, then turn out)</p>
+      <div class="exercise-sequence exercise-sequence-2">
+        <img src="assets/images/ringpushupbottom.png" alt="Ring push up — bottom, ring to shoulder">
+        <img src="assets/images/ringpushuptop.png" alt="Ring push up — top, turn out">
+      </div>
+      <p>As in Level 1. Plank on rings, lower until ring touches shoulder, push up and externally rotate the rings.</p>
+      <div class="ex-box">
+        <div class="ex-rx">Reps: × 15<br>Sets: Complete 3–5 sets of 15 × false grip ring rows and 15 × ring push ups</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=rLTVcV6KlQ8" target="_blank" rel="noopener">Watch demonstration</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1361,88 +1323,58 @@ a { color: var(--link); }
   <div class="chapter-opener">
     <h1>Level 4</h1>
     <div class="ch-accent"></div>
-    <div class="ch-subtitle">Finding the Hold</div>
+    <div class="ch-subtitle">Eccentric Control</div>
   </div>
   <div class="chapter-content">
-    <p class="level-intro">You are finding moments of balance — kicking up, catching a few seconds, coming down. This level extends the balance game and introduces freestanding kick-up practice.</p>
+    <p class="level-intro">As a level 4 athlete you should now be feeling quite strong on the rings. Your pull ups and dips should feel strong and you should be developing some strength in your false grip and transition. As you begin working eccentric muscle ups pay particular attention to retaining control through the transition. This is the most difficult part of the movement.</p>
 
     <h2 class="section-title">Mobility work</h2>
-
-    <div class="exercise-block">
-      <h3>Wrist Heel Raises + Fin Push-ups</h3>
-      <div class="exercise-img">
-        <img src="assets/images/finpushups.png" alt="Wrist heel raises + Fin push-ups — continue as previous levels">
-      </div>
-      <p>Continue as per previous levels.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 each, HLR 10 sec<br>Sets: 3–5 supersets</div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Desk Stretches + Hang</h3>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/overheaddeskstretch01.png" alt="Desk stretches">
-        <img src="assets/images/hang.png" alt="Hang from bar">
-      </div>
-      <p>Continue.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: 1 min unbroken hang<br>Sets: 3–5 sets</div>
-      </div>
-    </div>
-
-    <h2 class="section-title">Balance work</h2>
-
-    <div class="exercise-block">
-      <h3>15-Minute Balance Game</h3>
-      <p class="exercise-sequence-caption">Balance game — extend to 15 minutes</p>
-      <div class="exercise-sequence exercise-sequence-3">
-        <img src="assets/images/boxassistedhandstand01.png" alt="Balance game — setup">
-        <img src="assets/images/boxassistedhandstand02.png" alt="Balance game — finding balance">
-        <img src="assets/images/boxassistedhandstand03.png" alt="Balance game — forearm catch if needed">
-      </div>
-      <p>Extend the balance game to 15 minutes. The box is now optional. Continue accumulating holds of increasing duration — push toward consistent 10–15 second holds.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: 15-minute practice block</div>
-        <div class="ex-video"><a href="https://youtu.be/huCWZYfvVYY" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-    </div>
+    <p class="text-small">Continue <b>False grip stretch</b> and <b>Arm extension stretch</b> as in Level 1.</p>
 
     <h2 class="section-title">Strength work</h2>
 
     <div class="exercise-block">
-      <h3>Chest-to-Wall Handstand</h3>
-      <p class="exercise-sequence-caption">Walk up → Full hold (chest facing wall)</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/chesttowallhandstand01.png" alt="Chest-to-wall handstand — walk up">
-        <img src="assets/images/chesttowallhandstand02.png" alt="Chest-to-wall handstand — full hold">
+      <h3>Tempo eccentric ring muscle up (down)</h3>
+      <p class="exercise-sequence-caption">Negative sequence: Support → Dip → Transition → Hang</p>
+      <div class="exercise-sequence exercise-sequence-4">
+        <img src="assets/images/rgmuscledowntop.png" alt="Negative MU — 1. Support above rings">
+        <img src="assets/images/rgmuscledownbottomdip.png" alt="Negative MU — 2. Lower through dip (count of 4)">
+        <img src="assets/images/rgmuscledowndiptransition.png" alt="Negative MU — 3. Lean back, thumbs around chest">
+        <img src="assets/images/rgmuscledownbottom.png" alt="Negative MU — 4. Lower to hang, keep false grip">
       </div>
-      <p>All five focus points. 1-minute holds should be solid and automatic.</p>
+      <p>Begin the movement above the rings (jump or use a box to get into position). Lower through the dip slowly for a count of 4. Once you reach the bottom of the dip, lean back slowly bringing your thumbs around your chest until you are hanging at the top of the pull up position in false grip. This part of the movement is the hardest portion of the exercise. From here slowly lower down to a hang position in the rings while maintaining false grip. You have completed 1 rep.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: 1 min unbroken<br>Sets: 5 sets</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=f1yLxNMq23A" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-rx">Reps: Maintain a tempo such that each rep takes 10 seconds<br>Sets: Complete 10 single reps; rest as much as needed between reps to ensure movement quality is maintained</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=vSv_TOU3fhk" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
     <div class="exercise-block">
-      <h3>Kick-up Practice</h3>
-      <p class="exercise-sequence-caption">Step 1 → Step 2 → Step 3 → Full kick-up</p>
-      <div class="exercise-sequence exercise-sequence-4">
-        <img src="assets/images/handstandkickup01.png" alt="Kick-up — step 1">
-        <img src="assets/images/handstandkickup02.png" alt="Kick-up — step 2">
-        <img src="assets/images/handstandkickup03.png" alt="Kick-up — step 3">
-        <img src="assets/images/handstandkickup04.png" alt="Kick-up — full kick-up">
+      <h3>False grip pull ups</h3>
+      <p class="exercise-sequence-caption">Start (false grip hang) → End (thumbs to chest)</p>
+      <div class="exercise-sequence exercise-sequence-2">
+        <img src="assets/images/fgringhang.png" alt="False grip pull up — start, false grip hang">
+        <img src="assets/images/fgpulluptop.png" alt="False grip pull up — end, thumbs to chest">
       </div>
-      <p>Practise kicking up to freestanding. Alternate legs. Do not fixate on catching balance — just work through kick-ups with intention. Focus on creating tension before your feet leave the ground. Point your toes from the start. Fewer moving parts means easier balance.</p>
+      <p>As in Level 3. Pull until thumbs touch chest.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 kick-ups per leg<br>Sets: 5–10 sets</div>
-        <div class="ex-video"><a href="https://youtu.be/7defUKA3D3w" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-rx">Reps: × 5</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=5R07lItt9EY" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
     </div>
 
-    <div class="grad-box">
-      <div class="grad-check">✓</div>
-      <div class="grad-text">Level 4 Graduation: Can kick up and find balance consistently for 10 to 15 seconds.</div>
+    <div class="exercise-block">
+      <h3>Ring dips with turn out</h3>
+      <p class="exercise-sequence-caption">Top (support, rings turned out) → Bottom (rings to shoulder)</p>
+      <div class="exercise-sequence exercise-sequence-2">
+        <img src="assets/images/rgmuscledowntop.png" alt="Ring dip — top, support, rings turned out">
+        <img src="assets/images/rgmuscledownbottomdip.png" alt="Ring dip — bottom, rings to shoulder">
+      </div>
+      <p>As in Level 3. Rings turned out at top, lower until rings touch shoulder.</p>
+      <div class="ex-box">
+        <div class="ex-rx">Reps: × 5<br>Sets: Complete 3–5 sets of 5 × false grip pull ups and 5 × ring dips</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=wf8tAi6sfps" target="_blank" rel="noopener">Watch demonstration</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1454,84 +1386,28 @@ a { color: var(--link); }
   <div class="chapter-opener">
     <h1>Level 5</h1>
     <div class="ch-accent"></div>
-    <div class="ch-subtitle">Building Endurance</div>
+    <div class="ch-subtitle">First Muscle Up</div>
   </div>
   <div class="chapter-content">
-    <p class="level-intro">You can kick up and sustain 15 to 30-second holds regularly. This level develops the endurance and consistency required for a 60-second freestanding handstand. The emphasis shifts from finding balance to keeping it.</p>
-
-    <h2 class="section-title">Mobility work</h2>
-
-    <div class="exercise-block">
-      <h3>Wrist Heel Raises + Fin Push-ups</h3>
-      <div class="exercise-img">
-        <img src="assets/images/finpushups.png" alt="Wrist heel raises + Fin push-ups — continue">
-      </div>
-      <p>Continue.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 each, HLR 10 sec<br>Sets: 3–5 supersets</div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Desk Stretches + Hang</h3>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/overheaddeskstretch01.png" alt="Desk stretches">
-        <img src="assets/images/hang.png" alt="Hang from bar">
-      </div>
-      <p>Continue.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: 1 min unbroken hang<br>Sets: 3–5 sets</div>
-      </div>
-    </div>
+    <p class="level-intro">By now you should have or almost be ready to attempt your first full ring muscle up. When you prepare to complete the muscle up, practice the key positions you need to hit. You have practiced them during your time working at level 4. It is tempting to begin the transition early — this is natural as it is the hardest part of the movement so you want to get it done. Resist this urge; rather ensure you complete the pull up completely with your thumbs touching your chest before pulling through the transition into the bottom position of the dip. For most people it is not easy to push out of the dip. If you are unable to push out of the dip, don't be tempted to throw your legs around and swing wildly to finish your first muscle up. Return to an earlier level and work at correcting your technique.</p>
 
     <h2 class="section-title">Strength work</h2>
 
     <div class="exercise-block">
-      <h3>Chest-to-Wall Handstand</h3>
-      <p class="exercise-sequence-caption">Walk up → Full hold (chest facing wall)</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/chesttowallhandstand01.png" alt="Chest-to-wall handstand — walk up">
-        <img src="assets/images/chesttowallhandstand02.png" alt="Chest-to-wall handstand — full hold">
+      <h3>Ring muscle up</h3>
+      <p class="exercise-sequence-caption">Full sequence: 1. Hang → 2. Pull → 3. Transition → 4. Press → 5. Support (turn out)</p>
+      <div class="exercise-sequence exercise-sequence-5">
+        <img src="assets/images/ringmu1.png" alt="Ring muscle up — 1. False grip hang">
+        <img src="assets/images/ringmu2.png" alt="Ring muscle up — 2. Pull, thumbs to chest">
+        <img src="assets/images/ringmu3.png" alt="Ring muscle up — 3. Transition, rings to armpits">
+        <img src="assets/images/ringmu4.png" alt="Ring muscle up — 4. Press to support">
+        <img src="assets/images/ringmu5.png" alt="Ring muscle up — 5. Support, rings turned out">
       </div>
-      <p>Perfect form. All five focus points should be automatic.</p>
+      <p>Begin hanging under the rings in false grip. Pull up to the rings until your thumbs touch your chest. Pull the rings apart leaning forward and pulling the rings into your armpits. Once you are stable at the bottom of the dip position push up to support. Finally turn the rings out at the top. Then lower down through dip, transition and finally pull up to complete the rep hanging in false grip under the rings.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: 1 min unbroken<br>Sets: 5 sets</div>
-        <div class="ex-video"><a href="https://www.youtube.com/watch?v=f1yLxNMq23A" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-rx">Reps: × 10 single reps</div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=1_CIqS7CfwE" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Kick-up Practice</h3>
-      <p class="exercise-sequence-caption">Step 1 → Step 2 → Step 3 → Full kick-up</p>
-      <div class="exercise-sequence exercise-sequence-4">
-        <img src="assets/images/handstandkickup01.png" alt="Kick-up — step 1">
-        <img src="assets/images/handstandkickup02.png" alt="Kick-up — step 2">
-        <img src="assets/images/handstandkickup03.png" alt="Kick-up — step 3">
-        <img src="assets/images/handstandkickup04.png" alt="Kick-up — full kick-up">
-      </div>
-      <p>Focus on consistency and extending hold duration with each attempt.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 10 per leg<br>Sets: 5–10 sets</div>
-        <div class="ex-video"><a href="https://youtu.be/7defUKA3D3w" target="_blank" rel="noopener">Watch demonstration</a></div>
-      </div>
-    </div>
-
-    <div class="exercise-block">
-      <h3>Handstand Shoulder Tap</h3>
-      <p class="exercise-sequence-caption">Shift weight → Tap opposite shoulder</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/wallhandstandshouldertap01.png" alt="Handstand shoulder tap — shift weight">
-        <img src="assets/images/wallhandstandshouldertap02.png" alt="Handstand shoulder tap — tap shoulder">
-      </div>
-      <p>From chest-to-wall, shift your weight entirely onto one arm. Elevate strongly — push the ground away as hard as you can. Touch the opposite shoulder with your free hand. Alternate sides. This builds single-arm strength for advanced balance corrections.</p>
-      <div class="ex-box">
-        <div class="ex-rx">Reps: × 5 taps per side<br>Sets: 3–5 sets</div>
-      </div>
-    </div>
-
-    <div class="grad-box">
-      <div class="grad-check">✓</div>
-      <div class="grad-text">Level 5 Graduation: Have a consistent handstand of 30+ seconds but have not yet achieved a 60-second hold.</div>
     </div>
   </div>
 </section>
@@ -1543,45 +1419,33 @@ a { color: var(--link); }
   <div class="chapter-opener">
     <h1>Level 6</h1>
     <div class="ch-accent"></div>
-    <div class="ch-subtitle">The 60-Second Handstand</div>
+    <div class="ch-subtitle">Conditioning</div>
   </div>
   <div class="chapter-content">
-    <p class="level-intro">This is the grind. You can hold a handstand, but you are chasing 60 seconds. Practise most days. You will record many 50–59 second attempts before you break through. Once you achieve a clean 60-second hold on video, you graduate. Welcome to hand-balancing. You are now — officially — a beginner.</p>
+    <p class="level-intro">By now you are probably stoked that you can do a ring muscle up and keen to practice the movement as often as possible. Be cautious. Just because you can do something doesn't mean you should. Many people over do the high power work (i.e. muscle up) and neglect the foundational work that got them to this point. This will increase your chance of getting injured dramatically. With this in mind, it is now time to condition yourself to the muscle up movement so that it becomes something that is easy to do. I would recommend completing the following workout every 2 or 3 days.</p>
 
     <h2 class="section-title">Strength work</h2>
 
     <div class="exercise-block">
-      <h3>Freestanding Handstand</h3>
-      <p class="exercise-sequence-caption">Full freestanding hold</p>
-      <div class="exercise-sequence exercise-sequence-2">
-        <img src="assets/images/freestandinghandstand1.png" alt="Freestanding handstand">
-        <img src="assets/images/handstand01.png" alt="Freestanding handstand hold">
+      <h3>Muscle up conditioning</h3>
+      <div class="exercise-img">
+        <img src="assets/images/ringmu5.png" alt="Ring muscle up — support position, rings turned out">
       </div>
-      <p>Maintain a freestanding handstand. Scale to chest-to-wall for remaining time if needed. Priorities, in order:</p>
-      <ul class="priority-list">
-        <li><b>1. Don't fall over.</b> Safety first, always.</li>
-        <li><b>2. Grip the ground.</b> Active fingers are your primary balance tool.</li>
-        <li><b>3. Push tall.</b> Shoulders touch your ears. Maximum elevation.</li>
-        <li><b>4. Posterior pelvic tilt.</b> Tuck your pelvis to stack your body.</li>
-        <li><b>5. Legs together.</b> Squeeze as one unit.</li>
-        <li><b>6. Point or flex your toes.</b> Total body tension, tip to tail.</li>
-      </ul>
+      <p>Complete the following:</p>
+      <p><b>1 × ring muscle up, 3 × dips, muscle down, 3 × pull ups</b></p>
+      <p>Work up to completing 10 sets of this within a 30 min window. Once that is easy move to:</p>
+      <p><b>2 × ring muscle up, 6 × dips, muscle down, 6 × pull ups</b></p>
+      <p>Work up to completing 10 sets of this within a 30 min window.</p>
       <div class="ex-box">
-        <div class="ex-rx">Reps: 1 minute freestanding handstand<br>Sets: 5 rounds — 1 min work / 1 min rest</div>
-        <div class="ex-video"><a href="https://youtu.be/fBiYbkG_Uqk" target="_blank" rel="noopener">Watch demonstration</a></div>
+        <div class="ex-video"><a href="https://www.youtube.com/watch?v=6JcvbbIgvwc" target="_blank" rel="noopener">Watch demonstration</a></div>
       </div>
-    </div>
-
-    <div class="grad-box">
-      <div class="grad-check">✓</div>
-      <div class="grad-text">Level 6 Graduation: Record a 60-second freestanding handstand on video. Congratulations — you have earned your handstand. Now the real journey begins.</div>
     </div>
 
     <hr class="accent-hr">
 
     <div class="closing">
-      <p class="cl-main">Thank you for training with The Bodyweight Gym.</p>
-      <p class="cl-sub">The handstand is a lifelong skill. Continue practising, continue refining, and enjoy the process.</p>
+      <p class="cl-main">The Wrap Up</p>
+      <p class="cl-sub">At this stage the ring muscle up should feel easy. Congratulations, you have mastered the ring muscle up. Now onto bigger and better things.</p>
     </div>
   </div>
 </section>
@@ -1652,37 +1516,27 @@ a { color: var(--link); }
   const tocLinks = Array.from(tocNav.querySelectorAll('.toc-link'));
 
   const chapterNames = {
-    'cover': 'The Handstand',
+    'cover': 'The Ring Muscle Up',
     'frontmatter': 'Title & Disclaimer',
     'introduction': 'Introduction',
     'benchmarking': 'Benchmarking',
     'loading': 'Loading & Deloading',
     'workouts': 'The Workouts',
     'level-1': 'Level 1 — Foundation',
-    'level-2': 'Level 2 — Upside Down',
-    'level-3': 'Level 3 — Balance',
-    'level-4': 'Level 4 — The Hold',
-    'level-5': 'Level 5 — Endurance',
-    'level-6': 'Level 6 — 60 Seconds'
+    'level-2': 'Level 2 — Pull & Push',
+    'level-3': 'Level 3 — False Grip',
+    'level-4': 'Level 4 — Eccentric',
+    'level-5': 'Level 5 — First Muscle Up',
+    'level-6': 'Level 6 — Conditioning'
   };
 
   // ===== 1. AUTH =====
-  // When opened from the app, api_url is passed so verify-session is called on the app's API
-  var urlParams = new URLSearchParams(window.location.search);
-  var API_BASE = (urlParams.get('api_url') || urlParams.get('api') || '').replace(/\/+$/, '');
-
   function getSessionId() {
-    return urlParams.get('session_id');
+    return new URLSearchParams(window.location.search).get('session_id');
   }
   function isLocalDev() {
     var h = window.location.hostname;
     return h === 'localhost' || h === '127.0.0.1';
-  }
-
-  function getVerifyUrl() {
-    var sessionId = getSessionId();
-    var path = '/api/verify-session?session_id=' + encodeURIComponent(sessionId || '');
-    return API_BASE ? (API_BASE + path) : path;
   }
 
   async function verifyAccess() {
@@ -1693,7 +1547,7 @@ a { color: var(--link); }
       return;
     }
     try {
-      var resp = await fetch(getVerifyUrl());
+      var resp = await fetch('/api/verify-session?session_id=' + encodeURIComponent(sessionId));
       var data = await resp.json().catch(function() { return {}; });
       if (resp.ok) { showReader(); }
       else {
@@ -1757,7 +1611,7 @@ a { color: var(--link); }
   }
 
   function updateToolbarTitle(sectionId) {
-    toolbarChapter.textContent = chapterNames[sectionId] || 'The Handstand';
+    toolbarChapter.textContent = chapterNames[sectionId] || 'The Ring Muscle Up';
   }
 
   // ===== 3. TOC NAVIGATION =====
@@ -1895,30 +1749,30 @@ a { color: var(--link); }
         'body{font-family:Georgia,"Times New Roman",serif;line-height:1.7;color:#333;margin:1em;padding:0;}\n' +
         'h1{font-size:1.6em;font-weight:bold;margin:1em 0 0.5em;line-height:1.2;}\n' +
         'h2{font-size:1.3em;font-weight:bold;margin:1.5em 0 0.5em;}\n' +
-        'h3{font-size:1.1em;color:#2980B9;font-weight:bold;margin:1em 0 0.3em;}\n' +
+        'h3{font-size:1.1em;color:#555;font-weight:bold;margin:1em 0 0.3em;}\n' +
         'p{margin:0.6em 0;}\n' +
         'strong,b{font-weight:bold;color:#222;}\n' +
-        'a{color:#2980B9;}\n' +
+        'a{color:#8b6914;}\n' +
         'img{max-width:100%;height:auto;}\n' +
         'table{width:100%;border-collapse:collapse;margin:1em 0;}\n' +
         'th{background:#333;color:#fff;padding:0.5em;text-align:left;}\n' +
         'td{padding:0.5em;border-bottom:1px solid #ddd;vertical-align:top;}\n' +
-        '.chapter-opener{padding:1.5em 1em;margin:0 -1em 1em;border-bottom:3px solid #2980B9;}\n' +
+        '.chapter-opener{padding:1.5em 1em;margin:0 -1em 1em;border-bottom:3px solid #c8a55c;}\n' +
         '.chapter-opener h1{margin:0;font-size:1.6em;}\n' +
-        '.chapter-opener .ch-accent{width:40px;height:2px;background:#2980B9;margin:0.3em 0;}\n' +
+        '.chapter-opener .ch-accent{width:40px;height:2px;background:#c8a55c;margin:0.3em 0;}\n' +
         '.chapter-opener .ch-subtitle{color:#888;font-size:0.9em;}\n' +
         '.cover-hero{text-align:center;padding:4em 1em;page-break-after:always;}\n' +
         '.cover-hero>img,.cover-overlay,.cover-brand-line{display:none;}\n' +
         '.cover-content{position:static;}\n' +
         '.cover-label{font-size:0.9em;letter-spacing:0.2em;}\n' +
         '.cover-title{font-size:2.2em;font-weight:bold;margin:0.3em 0;}\n' +
-        '.cover-divider{width:60px;height:2px;background:#2980B9;margin:0.6em auto;}\n' +
-        '.cover-subtitle{color:#2980B9;}\n' +
+        '.cover-divider{width:60px;height:2px;background:#c8a55c;margin:0.6em auto;}\n' +
+        '.cover-subtitle{color:#c8a55c;}\n' +
         '.cover-tagline{color:#888;font-style:italic;margin-top:0.3em;}\n' +
-        '.cover-brand span{font-size:0.7em;text-transform:uppercase;letter-spacing:0.2em;color:#2980B9;}\n' +
+        '.cover-brand span{font-size:0.7em;text-transform:uppercase;letter-spacing:0.2em;color:#c8a55c;}\n' +
         '.title-page{text-align:center;padding:4em 1em;page-break-after:always;}\n' +
-        '.title-page .accent-rule{width:60px;height:2px;background:#2980B9;margin:0.5em auto;}\n' +
-        '.title-page .subtitle{color:#2980B9;}\n' +
+        '.title-page .accent-rule{width:60px;height:2px;background:#c8a55c;margin:0.5em auto;}\n' +
+        '.title-page .subtitle{color:#c8a55c;}\n' +
         '.title-page .tagline{color:#888;}\n' +
         '.title-page .author{margin-top:2em;}\n' +
         '.disclaimer{margin-top:1.5em;}\n' +
@@ -1927,9 +1781,9 @@ a { color: var(--link); }
         '.disclaimer p{font-size:0.88em;color:#777;}\n' +
         '.copyright{text-align:center;margin-top:2em;}\n' +
         '.copyright p{font-size:0.75em;color:#aaa;}\n' +
-        '.level-intro{font-style:italic;color:#555;padding:0.8em 1em;border-left:3px solid #2980B9;margin:1em 0;background:#f0f7fb;}\n' +
+        '.level-intro{font-style:italic;color:#555;padding:0.8em 1em;border-left:3px solid #c8a55c;margin:1em 0;background:#f9f9f5;}\n' +
         '.section-title{font-size:1.15em;font-weight:bold;margin:1.5em 0 0.5em;}\n' +
-        '.block-heading{font-weight:bold;color:#2980B9;margin:1.2em 0 0.2em;}\n' +
+        '.block-heading{font-weight:bold;color:#c8a55c;margin:1.2em 0 0.2em;}\n' +
         '.exercise-block{margin:1.5em 0;padding:1em;border:1px solid #ddd;}\n' +
         '.exercise-sequence{display:flex;flex-wrap:wrap;gap:6px;margin:0.8em 0;}\n' +
         '.exercise-sequence img{width:48%;}\n' +
@@ -1939,16 +1793,14 @@ a { color: var(--link); }
         '.ex-box{margin-top:0.8em;padding:0.8em;background:#f5f5f5;border:1px solid #eee;}\n' +
         '.ex-rx{font-weight:bold;font-size:0.9em;line-height:1.5;}\n' +
         '.ex-video{margin-top:0.4em;font-size:0.82em;}\n' +
-        '.ex-video a{color:#2980B9;text-decoration:none;}\n' +
+        '.ex-video a{color:#c8a55c;text-decoration:none;}\n' +
         '.ex-video a::before{content:"▶ ";font-size:0.8em;}\n' +
-        '.callout{font-style:italic;padding:0.8em 1em;border-left:3px solid #2980B9;margin:1em 0;background:#f0f7fb;}\n' +
+        '.callout{font-style:italic;padding:0.8em 1em;border-left:3px solid #c8a55c;margin:1em 0;background:#f9f9f5;}\n' +
         '.bench-table th:first-child{text-align:center;width:50px;}\n' +
-        '.bench-table td:first-child{text-align:center;font-weight:bold;color:#2980B9;}\n' +
-        '.grad-box{border:2px solid #2980B9;padding:0.8em;margin:1em 0;display:flex;gap:8px;}\n' +
-        '.priority-list{list-style:none;padding:0;margin:0.5em 0;}\n' +
-        '.priority-list li{padding:0.2em 0 0.2em 1em;}\n' +
+        '.bench-table td:first-child{text-align:center;font-weight:bold;color:#c8a55c;}\n' +
+        '.grad-box{border:2px solid #c8a55c;padding:0.8em;margin:1em 0;display:flex;gap:8px;}\n' +
         '.closing{text-align:center;margin-top:2em;}\n' +
-        '.accent-hr{border:none;height:2px;background:#2980B9;margin:2em 0;}\n' +
+        '.accent-hr{border:none;height:2px;background:#c8a55c;margin:2em 0;}\n' +
         '.text-small{font-size:0.88em;}\n';
 
       zip.file('OEBPS/style.css', epubCSS);
@@ -2002,8 +1854,8 @@ a { color: var(--link); }
         '<?xml version="1.0" encoding="UTF-8"?>\n' +
         '<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">\n' +
         '  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">\n' +
-        '    <dc:identifier id="uid">handstand-training-guide-v2</dc:identifier>\n' +
-        '    <dc:title>The Handstand — The Complete Training Guide</dc:title>\n' +
+        '    <dc:identifier id="uid">ring-muscle-up-guide-v1</dc:identifier>\n' +
+        '    <dc:title>The Ring Muscle Up — The Complete Training Guide</dc:title>\n' +
         '    <dc:creator>The Bodyweight Gym</dc:creator>\n' +
         '    <dc:language>en</dc:language>\n' +
         '    <meta property="dcterms:modified">' + now + '</meta>\n' +
@@ -2042,7 +1894,7 @@ a { color: var(--link); }
 
       var a = document.createElement('a');
       a.href = URL.createObjectURL(epubBlob);
-      a.download = 'The-Handstand-Training-Guide.epub';
+      a.download = 'The-Ring-Muscle-Up-Guide.epub';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

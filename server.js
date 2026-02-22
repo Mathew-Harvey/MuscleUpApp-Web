@@ -14,6 +14,14 @@ app.get('/download/ebook', (req, res) => {
   });
 });
 
+// PDF download
+app.get('/download/pdf', (req, res) => {
+  const file = path.join(__dirname, 'assets', 'Ring Muscle Up Program (4).pdf');
+  res.download(file, 'Ring-Muscle-Up-Program.pdf', (err) => {
+    if (err && !res.headersSent) res.status(500).send('Download failed');
+  });
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
