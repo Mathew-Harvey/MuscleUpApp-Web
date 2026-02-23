@@ -1734,42 +1734,27 @@ a { color: var(--link); }
         '</container>'
       );
 
-      // Use canvas to convert images to base64 - bypasses CORS completely
       var imgMap = {};
       var imgList = [];
       var imgEls = document.querySelectorAll('#content-area img');
-      
+
       for (var i = 0; i < imgEls.length; i++) {
         var img = imgEls[i];
         var src = img.getAttribute('src');
         if (!src || imgMap[src]) continue;
         imgMap[src] = true;
-        
+
         var fname = src.split('/').pop();
         if (!fname || !fname.match(/\.(png|jpg|jpeg|gif|webp)$/i)) {
           fname = 'image-' + i + '.png';
         }
-        
+
         try {
-          // Create canvas and draw image to get base64
-          var canvas = document.createElement('canvas');
-          canvas.width = img.naturalWidth || img.width;
-          canvas.height = img.naturalHeight || img.height;
-          var ctx = canvas.getContext('2d');
-          
-          // Check if image is loaded
-          if (img.complete && img.naturalHeight > 0) {
-            ctx.drawImage(img, 0, 0);
-            var dataUrl = canvas.toDataURL('image/png');
-            var base64 = dataUrl.split(',')[1];
-            var binary = atob(base64);
-            var array = new Uint8Array(binary.length);
-            for (var j = 0; j < binary.length; j++) {
-              array[j] = binary.charCodeAt(j);
-            }
-            imgList.push({ filename: fname, blob: new Blob([array], { type: 'image/png' }), type: 'image/png' });
-            zip.file('OEBPS/assets/images/' + fname, new Blob([array], { type: 'image/png' }));
-          }
+          var resp = await fetch(src);
+          var blob = await resp.blob();
+          var type = blob.type || 'image/png';
+          imgList.push({ filename: fname, type: type });
+          zip.file('OEBPS/assets/images/' + fname, blob);
         } catch (e) {
           console.log('Skipping image:', fname, e.message);
         }
@@ -1848,6 +1833,9 @@ a { color: var(--link); }
         clone.querySelectorAll('[style]').forEach(function(el) { el.removeAttribute('style'); });
 
         var html = clone.innerHTML;
+
+        html = html.replace(/(src=["'])(?:https?:\/\/[^"']*)?\/assets\/images\//gi, '$1assets/images/');
+
         var voidTags = ['br','hr','img','input','link','meta'];
         voidTags.forEach(function(tag) {
           var re = new RegExp('<(' + tag + ')(\\s[^>]*?)?\\s*>', 'gi');
