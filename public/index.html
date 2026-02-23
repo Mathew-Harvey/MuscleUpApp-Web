@@ -4,13 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Muscle Up Tracker — The Bodyweight Gym</title>
+<link rel="icon" href="/assets/images/bwlogo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <nav class="nav" id="nav" style="display:none">
-  <a href="#/dashboard" class="nav-logo">The <span>Bodyweight</span> Gym</a>
+  <a href="#/dashboard" class="nav-logo" aria-label="The Bodyweight Gym">
+        <img src="/assets/images/bwgymdarklogo.jpg" alt="" class="nav-logo-img nav-logo-img--dark">
+        <img src="/assets/images/bwlogo.png" alt="" class="nav-logo-img nav-logo-img--light">
+      </a>
   <div class="nav-right">
     <a href="#/ebook" class="nav-link nav-link--ebook" title="Your ebook">📖 Ebook</a>
     <a href="#/settings" class="nav-icon" id="settingsBtn" title="Settings">⚙️</a>
@@ -22,7 +26,10 @@
 <div class="toast" id="toast"></div>
 <div class="modal-overlay" id="setPasswordModal" aria-hidden="true">
   <div class="modal-card">
-    <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
+    <div class="auth-brand">
+        <img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark">
+        <img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light">
+      </div>
     <h2 class="modal-title">Set your password</h2>
     <p class="auth-sub">Choose a new password to sign in.</p>
     <div class="alert alert-error" id="setPasswordError" style="display:none"></div>

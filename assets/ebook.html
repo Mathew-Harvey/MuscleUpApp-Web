@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Ring Muscle Up — The Complete Training Guide</title>
-<link rel="icon" href="assets/images/coverpage.png" type="image/png">
+<link rel="icon" href="/assets/images/bwlogo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -275,6 +275,9 @@ a { color: var(--link); }
 .cover-brand {
   margin-top: 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
 }
+.cover-brand-logo {
+  height: 36px; width: auto; display: block; object-fit: contain;
+}
 .cover-brand-line { width: 100px; height: 1px; background: var(--chrome-accent); opacity: 0.5; }
 .cover-brand span {
   font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700;
@@ -475,6 +478,8 @@ a { color: var(--link); }
 .title-page .subtitle { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 600; color: var(--accent); }
 .title-page .tagline { font-size: 0.9rem; color: var(--sub); margin-top: 0.25rem; }
 .title-page .author { font-family: var(--font-heading); font-weight: 600; font-size: 0.95rem; color: var(--text); margin-top: 3rem; }
+.title-page-brand { margin-top: 3rem; }
+.title-page-logo { height: 32px; width: auto; display: block; margin: 0 auto; object-fit: contain; }
 .title-page .edition { font-size: 0.85rem; color: var(--sub); margin-top: 0.25rem; }
 
 /* Disclaimer */
@@ -692,6 +697,8 @@ a { color: var(--link); }
   .title-page .subtitle { color: #444 !important; }
   .title-page .tagline { color: #777 !important; }
   .title-page .author { color: #222 !important; }
+  .title-page-brand { margin-top: 2em !important; }
+  .title-page-logo { height: 28px !important; }
   .title-page .edition { color: #777 !important; }
   .disclaimer h2 { color: #555 !important; }
   .disclaimer p { color: #555 !important; }
@@ -923,8 +930,7 @@ a { color: var(--link); }
       <div class="cover-subtitle">The Complete Training Guide</div>
       <div class="cover-tagline">From Your First Ring Hang to a Clean, Strict Muscle Up</div>
       <div class="cover-brand">
-        <div class="cover-brand-line"></div>
-        <span>The Bodyweight Gym</span>
+        <img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="cover-brand-logo">
       </div>
     </div>
   </div>
@@ -940,7 +946,9 @@ a { color: var(--link); }
       <div class="accent-rule"></div>
       <div class="subtitle">The Complete Training Guide</div>
       <div class="tagline">From Your First Ring Hang to a Clean, Strict Muscle Up</div>
-      <div class="author">The Bodyweight Gym</div>
+      <div class="title-page-brand">
+        <img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="title-page-logo">
+      </div>
       <div class="edition">Version 1</div>
     </div>
     <hr class="accent-hr">

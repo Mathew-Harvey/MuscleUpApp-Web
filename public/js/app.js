@@ -186,7 +186,7 @@ function renderLogin() {
     <div class="auth-page">
       ${heroHtml('hero--auth')}
       <div class="auth-card">
-        <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
+        <div class="auth-brand"><img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark"><img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light"></div>
         <h1>Welcome back</h1>
         <p class="auth-sub">Log in to track your muscle up progress.</p>
         <div class="alert alert-error" id="authError" style="display:none"></div>
@@ -234,7 +234,7 @@ function renderRegister() {
     <div class="auth-page">
       ${heroHtml('hero--auth')}
       <div class="auth-card">
-        <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
+        <div class="auth-brand"><img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark"><img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light"></div>
         <h1>Create your account</h1>
         <p class="auth-sub">Start tracking your muscle up journey.</p>
         <div class="alert alert-error" id="authError" style="display:none"></div>
@@ -288,7 +288,7 @@ function renderForgotPassword() {
     <div class="auth-page">
       ${heroHtml('hero--auth')}
       <div class="auth-card">
-        <div class="auth-brand">The <span>Bodyweight</span> Gym</div>
+        <div class="auth-brand"><img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark"><img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light"></div>
         <h1>Reset password</h1>
         <p class="auth-sub">Enter your email and we'll send you a link to set a new password.</p>
         <div class="alert alert-error" id="authError" style="display:none"></div>
