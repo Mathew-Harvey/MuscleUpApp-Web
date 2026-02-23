@@ -64,17 +64,20 @@ img { max-width: 100%; display: block; }
 .nav {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0.75rem 1rem;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+  background: #303030;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+[data-theme="light"] .nav {
+  background: #e8e8e8;
+  border-bottom-color: rgba(0,0,0,0.08);
 }
 .nav-logo {
   display: flex; align-items: center;
   text-decoration: none; color: inherit;
 }
 .nav-logo-img {
-  height: 28px; width: auto; display: block; object-fit: contain;
+  height: 44px; width: auto; display: block; object-fit: contain;
 }
 .nav-logo-img--light { display: none; }
 .nav-logo-img--dark { display: block; }
@@ -88,7 +91,7 @@ img { max-width: 100%; display: block; }
 .nav-link:hover { color: var(--text); text-decoration: none; }
 .nav-link--ebook { color: var(--accent2); font-weight: 600; }
 .nav-link--ebook:hover { color: var(--accent); }
-@media (min-width: 640px) { .nav-user { display: inline; } .nav { padding: 0.75rem 1.5rem; } }
+@media (min-width: 640px) { .nav-user { display: inline; } .nav { padding: 0.85rem 1.5rem; } }
 
 /* ===== MAIN / CONTAINER ===== */
 .main { padding-bottom: env(safe-area-inset-bottom, 0); }
