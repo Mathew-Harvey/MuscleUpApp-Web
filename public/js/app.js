@@ -426,7 +426,7 @@ function renderEbook() {
       </div>
       <div class="ebook-hero">
         <div class="ebook-hero-cover">
-          <img src="/images/freestandinghandstand1.png" alt="" class="ebook-cover-img">
+          <img src="${ASSETS_BASE}/coverpage.png" alt="The Muscle Up — The Complete Training Guide" class="ebook-cover-img">
         </div>
         <div class="ebook-hero-body">
           <h2 class="ebook-title">From Zero to Muscle Up</h2>
