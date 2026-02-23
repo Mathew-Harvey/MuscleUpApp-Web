@@ -1065,7 +1065,7 @@ const EXERCISE_PROGRESSION_IMAGES = {
   false_grip_stretch: ['wrist01.png', 'wrist02.png', 'wrist03.png'],
 };
 const ASSETS_BASE = '/assets/images';
-const HERO_IMAGE = ASSETS_BASE + '/images/coverpage.png';
+const HERO_IMAGE = ASSETS_BASE + '/coverpage.png';
 
 function heroHtml(className = '') {
   return `<div class="hero ${className}"><img src="${HERO_IMAGE}" alt="The Ring Muscle Up" class="hero-img" loading="lazy"></div>`;
