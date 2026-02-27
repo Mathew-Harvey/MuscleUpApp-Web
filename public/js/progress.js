@@ -1,5 +1,5 @@
 /* ================================================================
-   Progress Dashboard — rendering, mock data, heatmap, chart
+   Progress Dashboard — rendering, heatmap, chart, journey, bests
    All functions prefixed with pd to avoid global collisions
    Must load BEFORE app.js (router calls renderProgress)
    ================================================================ */
@@ -23,20 +23,38 @@ const PD_EXERCISE_NAMES = {
   ring_muscle_up: 'Ring Muscle Up',
   muscle_up_conditioning: 'MU Conditioning',
   arm_extension_stretch: 'Arm Ext. Stretch',
+  wrist_warmup: 'Wrist Warm-Up',
+  ring_dead_hang: 'Ring Dead Hang',
+  ring_rows: 'Ring Rows',
+  push_ups: 'Push-Ups',
+  scapula_pulls: 'Scapula Pull-Ups',
+  ring_support: 'Ring Support Hold',
+  wrist_warmup_2: 'Wrist Warm-Up',
+  pull_ups: 'Pull-Ups',
+  bar_dips: 'Bar Dips',
+  ring_support_2: 'Ring Support (Turnout)',
+  wrist_warmup_3: 'False Grip Prep',
+  false_grip_pullups: 'False Grip Pull-Ups',
+  false_grip_rows: 'False Grip Rows',
+  bent_arm_hold: 'Bent Arm Hold',
+  ring_support_turnout: 'Ring Support (Turnout)',
+  wrist_warmup_4: 'Wrist Warm-Up + Mobility',
+  false_grip_pullups_4: 'False Grip Pull-Ups (Chest)',
+  negative_muscle_ups: 'Negative Muscle Ups',
+  deep_ring_dips: 'Deep Ring Dips',
+  russian_dips: 'Russian Dips',
+  wrist_warmup_5: 'Wrist Warm-Up',
+  false_grip_pull_high: 'False Grip Pull to Chest',
+  muscle_up_attempts: 'Muscle Up Attempts',
+  transition_catch: 'Low Ring Muscle Up',
+  deep_dips_5: 'Deep Ring Dips',
+  muscle_up_sets: 'Muscle Up Sets',
+  muscle_up_emom: 'Muscle Up EMOM',
+  ring_strength: 'Ring Strength Complex',
 };
 
 function pdExName(key) {
   return PD_EXERCISE_NAMES[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-}
-
-// ===== SEEDED PRNG =====
-function pdMulberry32(a) {
-  return function () {
-    a |= 0; a = a + 0x6D2B79F5 | 0;
-    let t = Math.imul(a ^ a >>> 15, 1 | a);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
 }
 
 // ===== COUNT-UP ANIMATION =====
@@ -57,113 +75,6 @@ function pdFormatHold(seconds) {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return s === 0 ? m + 'm' : m + 'm ' + s + 's';
-}
-
-// ===== MOCK DATA GENERATOR =====
-function pdGenerateMockStats(dashboard) {
-  const rng = pdMulberry32(42);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  // --- Heatmap (182 days) ---
-  const heatmap = [];
-  for (let i = 181; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    const monthsAgo = i / 30;
-    const bias = Math.max(0.3, 1 - monthsAgo * 0.1);
-    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
-
-    if (i === 0) {
-      heatmap.push({ date: pdFmtISO(d), count: Math.max(1, Math.floor(rng() * 4) + 1) });
-    } else if (rng() < 0.15) {
-      heatmap.push({ date: pdFmtISO(d), count: 0 });
-    } else {
-      const maxCount = isWeekend ? 6 : 5;
-      const count = Math.floor(rng() * maxCount * bias) + (rng() > 0.4 ? 1 : 0);
-      heatmap.push({ date: pdFmtISO(d), count });
-    }
-  }
-
-  // --- Weekly volume (12 weeks) ---
-  const weeklyVolume = [];
-  for (let w = 11; w >= 0; w--) {
-    const weekStart = new Date(today);
-    weekStart.setDate(weekStart.getDate() - w * 7);
-    const year = weekStart.getFullYear();
-    const janFirst = new Date(year, 0, 1);
-    const weekNum = Math.ceil(((weekStart - janFirst) / 86400000 + janFirst.getDay() + 1) / 7);
-    const weekLabel = `${year}-W${String(weekNum).padStart(2, '0')}`;
-
-    let sessions = Math.floor(rng() * 4) + 3;
-    const trend = 1 + (11 - w) * 0.02;
-    sessions = Math.round(sessions * trend);
-
-    const boost = w < 3 ? 1.2 : 1;
-    sessions = Math.round(sessions * boost);
-
-    const setsPerSession = Math.floor(rng() * 4) + 3;
-    weeklyVolume.push({ week: weekLabel, sessions, sets: sessions * setsPerSession });
-  }
-
-  // --- Personal bests ---
-  const personalBests = [
-    { exercise_key: 'ring_hang', best_hold_seconds: 65, best_sets: 5, achieved_at: '2026-01-15' },
-    { exercise_key: 'false_grip_hang', best_hold_seconds: 45, best_sets: 4, achieved_at: '2026-02-01' },
-    { exercise_key: 'bent_arm_false_grip_hang', best_hold_seconds: 30, best_sets: 3, achieved_at: '2026-02-10' },
-    { exercise_key: 'false_grip', best_hold_seconds: 50, best_sets: 5, achieved_at: '2025-12-20' },
-    { exercise_key: 'ring_dips', best_hold_seconds: 0, best_sets: 8, achieved_at: '2026-01-28' },
-    { exercise_key: 'pull_up', best_hold_seconds: 0, best_sets: 10, achieved_at: '2026-02-18' },
-  ];
-
-  // --- Level timeline (from real graduations) ---
-  const graduations = dashboard.graduations || [];
-  const userCreated = dashboard.user?.created_at || '2025-09-14';
-  const levelTimeline = [];
-  for (let lv = 1; lv <= 6; lv++) {
-    const grad = graduations.find(g => g.level === lv);
-    const prevGrad = graduations.find(g => g.level === lv - 1);
-    const started = lv === 1 ? userCreated.split('T')[0] : (prevGrad ? prevGrad.graduated_at.split('T')[0] : null);
-    levelTimeline.push({
-      level: lv,
-      started_at: started,
-      graduated_at: grad ? grad.graduated_at.split('T')[0] : null,
-    });
-  }
-
-  // --- Exercise breakdown (top 10) ---
-  const exerciseBreakdown = [
-    { exercise_key: 'ring_hang', name: 'Ring Hang', total_logs: 42 },
-    { exercise_key: 'false_grip_ring_rows', name: 'FG Ring Rows', total_logs: 38 },
-    { exercise_key: 'ring_push_ups', name: 'Ring Push-ups', total_logs: 35 },
-    { exercise_key: 'pull_up', name: 'Pull-up', total_logs: 31 },
-    { exercise_key: 'false_grip_hang', name: 'FG Hang', total_logs: 28 },
-    { exercise_key: 'ring_dips', name: 'Ring Dips', total_logs: 24 },
-    { exercise_key: 'false_grip_pull_ups', name: 'FG Pull-ups', total_logs: 19 },
-    { exercise_key: 'bar_dip', name: 'Bar Dip', total_logs: 16 },
-    { exercise_key: 'transition_ring_rows', name: 'Transition Rows', total_logs: 12 },
-    { exercise_key: 'bent_arm_false_grip_hang', name: 'Bent Arm FG Hang', total_logs: 9 },
-  ];
-
-  const memberSinceDays = Math.floor((today - new Date(userCreated)) / 86400000);
-
-  return {
-    heatmap,
-    weeklyVolume,
-    personalBests,
-    levelTimeline,
-    exerciseBreakdown,
-    totals: {
-      totalSessions: dashboard.totalSessions || 87,
-      totalSets: 412,
-      totalLogs: 193,
-      memberSinceDays,
-    },
-    streak: {
-      current: dashboard.streak || 12,
-      longest: 23,
-    },
-  };
 }
 
 function pdFmtISO(d) {
@@ -187,16 +98,17 @@ async function renderProgress() {
   const appEl = document.querySelector('#app');
   appEl.innerHTML = '<div class="pd-wrap"><p style="color:#8b949e;">Loading…</p></div>';
 
-  let dashboard;
+  let dashboard, stats;
   try {
-    dashboard = await api('/dashboard');
-    if (!dashboard) return;
+    [dashboard, stats] = await Promise.all([
+      api('/dashboard'),
+      api('/dashboard/stats'),
+    ]);
+    if (!dashboard || !stats) return;
   } catch (err) {
     appEl.innerHTML = `<div class="pd-wrap"><div class="alert alert-error">${esc(err.message)}</div></div>`;
     return;
   }
-
-  const stats = pdGenerateMockStats(dashboard);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -275,6 +187,7 @@ async function renderProgress() {
   const practicedHtml = `
     <section class="pd-section" aria-label="Most practiced exercises">
       <h2 class="pd-section-title">Most Practiced</h2>
+      ${topExercises.length > 0 ? `
       <div class="pd-practiced-list">
         ${topExercises.map((ex, i) => {
           const pct = Math.round((ex.total_logs / maxLogs) * 100);
@@ -288,7 +201,7 @@ async function renderProgress() {
               <span class="pd-practiced-count">${ex.total_logs}</span>
             </div>`;
         }).join('')}
-      </div>
+      </div>` : `<div class="pd-bests-empty">Log some exercises to see your most practiced! 💪</div>`}
     </section>`;
 
   appEl.innerHTML = `
