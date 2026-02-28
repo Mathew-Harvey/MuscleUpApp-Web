@@ -25,6 +25,12 @@
   --body: 'Source Sans 3', sans-serif;
   --radius: 6px;
   --radius-lg: 10px;
+  /* Progress heatmap (theme-aware) */
+  --pd-heatmap-0: #161b22;
+  --pd-heatmap-1: #0e4429;
+  --pd-heatmap-2: #006d32;
+  --pd-heatmap-3: #26a641;
+  --pd-heatmap-4: #39d353;
 }
 
 /* Light theme */
@@ -41,6 +47,12 @@
   --muted: #8a857d;
   --light: #1a1714;
   --border: rgba(0,0,0,0.08);
+  /* Heatmap: green shades that contrast on light background */
+  --pd-heatmap-0: #e8e5df;
+  --pd-heatmap-1: #bbf7d0;
+  --pd-heatmap-2: #86efac;
+  --pd-heatmap-3: #4ade80;
+  --pd-heatmap-4: #22c55e;
 }
 
 html { font-size: 16px; -webkit-text-size-adjust: 100%; }

@@ -81,6 +81,91 @@ function pdFmtISO(d) {
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 }
 
+// ===== LIVE STATS (real dashboard data; default) =====
+// useLiveData = localStorage.getItem('pd_live_data') !== '0' → real data by default; only '0' turns on demo
+function pdBuildLiveStats(dashboard) {
+  const userCreated = dashboard.user?.created_at || new Date().toISOString();
+  const createdDate = userCreated.split('T')[0];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const memberSinceDays = Math.floor((today - new Date(createdDate + 'T00:00:00')) / 86400000);
+
+  // Heatmap from recentLogs: group by session_date
+  const heatmapByDate = {};
+  (dashboard.recentLogs || []).forEach(log => {
+    const d = log.session_date;
+    if (d) heatmapByDate[d] = (heatmapByDate[d] || 0) + 1;
+  });
+  const heatmap = [];
+  for (let i = 181; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = pdFmtISO(d);
+    heatmap.push({ date: dateStr, count: heatmapByDate[dateStr] || 0 });
+  }
+
+  // Weekly volume from recentLogs (week key = ISO week)
+  const weekToSets = {};
+  (dashboard.recentLogs || []).forEach(log => {
+    const d = new Date(log.session_date + 'T00:00:00');
+    const janFirst = new Date(d.getFullYear(), 0, 1);
+    const weekNum = Math.ceil(((d - janFirst) / 86400000 + janFirst.getDay() + 1) / 7);
+    const weekLabel = d.getFullYear() + '-W' + String(weekNum).padStart(2, '0');
+    if (!weekToSets[weekLabel]) weekToSets[weekLabel] = { sessions: 0, sets: 0 };
+    weekToSets[weekLabel].sessions += 1;
+    weekToSets[weekLabel].sets += log.sets_completed || 0;
+  });
+  const weeklyVolume = Object.entries(weekToSets)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .slice(-12)
+    .map(([week, v]) => ({ week, sessions: v.sessions, sets: v.sets }));
+
+  // Level timeline from graduations
+  const graduations = dashboard.graduations || [];
+  const levelTimeline = [];
+  for (let lv = 1; lv <= 6; lv++) {
+    const grad = graduations.find(g => g.level === lv);
+    const prevGrad = graduations.find(g => g.level === lv - 1);
+    const started = lv === 1 ? createdDate : (prevGrad ? prevGrad.graduated_at.split('T')[0] : null);
+    levelTimeline.push({
+      level: lv,
+      started_at: started,
+      graduated_at: grad ? grad.graduated_at.split('T')[0] : null,
+    });
+  }
+
+  // Exercise breakdown from recentLogs (top by total_logs)
+  const exCounts = {};
+  (dashboard.recentLogs || []).forEach(log => {
+    const k = log.exercise_key || 'unknown';
+    exCounts[k] = (exCounts[k] || 0) + (log.sets_completed || 0);
+  });
+  const exerciseBreakdown = Object.entries(exCounts)
+    .map(([exercise_key, total_logs]) => ({ exercise_key, name: pdExName(exercise_key), total_logs }))
+    .sort((a, b) => b.total_logs - a.total_logs)
+    .slice(0, 10);
+
+  const currentStreak = dashboard.streak != null ? dashboard.streak : 0;
+  const storedLongest = parseInt(localStorage.getItem('pd_longest_streak') || '0', 10);
+  const longest = Math.max(currentStreak, storedLongest);
+  if (longest > storedLongest) localStorage.setItem('pd_longest_streak', String(longest));
+
+  return {
+    heatmap,
+    weeklyVolume: weeklyVolume.length > 0 ? weeklyVolume : [{ week: pdFmtISO(today).slice(0, 4) + '-W01', sessions: 0, sets: 0 }],
+    personalBests: [], // API could add later
+    levelTimeline,
+    exerciseBreakdown,
+    totals: {
+      totalSessions: dashboard.totalSessions != null ? dashboard.totalSessions : 0,
+      totalSets: (dashboard.recentLogs || []).reduce((s, l) => s + (l.sets_completed || 0), 0),
+      totalLogs: (dashboard.recentLogs || []).length,
+      memberSinceDays,
+    },
+    streak: { current: currentStreak, longest },
+  };
+}
+
 function pdFmtDatePretty(dateStr) {
   try {
     return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -175,24 +260,18 @@ async function renderProgress() {
   const appEl = document.querySelector('#app');
   appEl.innerHTML = '<div class="pd-wrap"><p style="color:#8b949e;">Loading…</p></div>';
 
-  const useLiveData = localStorage.getItem('pd_live_data') === '1';
-
-  let dashboard, stats;
+  let dashboard;
   try {
-    if (useLiveData) {
-      [dashboard, stats] = await Promise.all([
-        api('/dashboard'),
-        api('/dashboard/stats'),
-      ]);
-    } else {
-      dashboard = await api('/dashboard');
-      stats = pdGenerateDemoStats(dashboard);
-    }
-    if (!dashboard || !stats) return;
+    dashboard = await api('/dashboard');
+    if (!dashboard) return;
   } catch (err) {
     appEl.innerHTML = `<div class="pd-wrap"><div class="alert alert-error">${esc(err.message)}</div></div>`;
     return;
   }
+
+  // Real data by default; only explicit '0' in localStorage turns on demo/sample data
+  const useLiveData = localStorage.getItem('pd_live_data') !== '0';
+  const stats = useLiveData ? pdBuildLiveStats(dashboard) : pdGenerateDemoStats(dashboard);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -288,20 +367,18 @@ async function renderProgress() {
       </div>` : `<div class="pd-bests-empty">Log some exercises to see your most practiced! 💪</div>`}
     </section>`;
 
-  const demoBannerHtml = useLiveData ? '' : `
-      <div class="pd-demo-banner">
-        <div class="pd-demo-banner-text">
-          <strong>You're viewing demo data.</strong> Switch to your real progress to see your actual training stats.
-        </div>
-        <button class="pd-demo-banner-btn" id="pdSwitchLive">Show My Real Data</button>
-      </div>`;
+  const demoToggleLabel = useLiveData ? 'View demo data' : 'Show my real data';
+  const demoToggleHtml = `
+    <div class="pd-demo-toggle">
+      <button type="button" class="pd-demo-btn" id="pdDemoToggle" aria-pressed="${!useLiveData}">${demoToggleLabel}</button>
+    </div>`;
 
   appEl.innerHTML = `
     <div class="pd-wrap">
       <a href="#/dashboard" class="pd-back">← Dashboard</a>
       <h1 class="pd-title">Progress Dashboard</h1>
       <p class="pd-subtitle">Your training journey at a glance</p>
-      ${demoBannerHtml}
+      ${demoToggleHtml}
       ${heroHtml}
       ${heatmapHtml}
       ${chartHtml}
@@ -341,11 +418,12 @@ async function renderProgress() {
   // --- Post-render: heatmap tooltip ---
   pdBindHeatmapTooltip();
 
-  // --- Post-render: demo banner switch button ---
-  const switchBtn = document.getElementById('pdSwitchLive');
-  if (switchBtn) {
-    switchBtn.addEventListener('click', () => {
-      localStorage.setItem('pd_live_data', '1');
+  // --- Demo toggle: switch between real and sample data ---
+  const demoToggle = document.getElementById('pdDemoToggle');
+  if (demoToggle) {
+    demoToggle.addEventListener('click', () => {
+      const useLive = localStorage.getItem('pd_live_data') !== '0';
+      localStorage.setItem('pd_live_data', useLive ? '0' : '1');
       renderProgress();
     });
   }
@@ -417,11 +495,11 @@ function pdBuildHeatmap(heatmapMap, today) {
         </div>
         <div class="pd-heatmap-legend">
           <span>Less</span>
-          <div class="pd-heatmap-legend-cell" style="background:#161b22"></div>
-          <div class="pd-heatmap-legend-cell" style="background:#0e4429"></div>
-          <div class="pd-heatmap-legend-cell" style="background:#006d32"></div>
-          <div class="pd-heatmap-legend-cell" style="background:#26a641"></div>
-          <div class="pd-heatmap-legend-cell" style="background:#39d353"></div>
+          <div class="pd-heatmap-legend-cell pd-heatmap-legend-cell--0"></div>
+          <div class="pd-heatmap-legend-cell pd-heatmap-legend-cell--1"></div>
+          <div class="pd-heatmap-legend-cell pd-heatmap-legend-cell--2"></div>
+          <div class="pd-heatmap-legend-cell pd-heatmap-legend-cell--3"></div>
+          <div class="pd-heatmap-legend-cell pd-heatmap-legend-cell--4"></div>
           <span>More</span>
         </div>
       </div>

@@ -9,12 +9,14 @@ const nav = $('#nav');
 let LEVELS = [];
 let currentUser = null;
 
-// Apply theme to document
+// Apply theme to document (consistent on load and navigation; persist for next load)
 function applyTheme(theme) {
   if (theme === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('mu_theme', 'light'); } catch (_) {}
   } else {
-    document.documentElement.removeAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    try { localStorage.setItem('mu_theme', 'dark'); } catch (_) {}
   }
 }
 
@@ -143,7 +145,9 @@ async function router() {
     }
   }
 
-  nav.style.display = currentUser ? '' : 'none';
+  // Only show main app nav when authenticated (never on login/register/forgot-password or set-password)
+  const isAuthRoute = ['/login', '/register', '/forgot-password'].includes(path);
+  nav.style.display = currentUser && !isAuthRoute ? '' : 'none';
   if (currentUser) $('#navUser').textContent = currentUser.display_name;
 
   if (path === '/login') return renderLogin();
@@ -167,11 +171,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   router();
 });
 
-// Logout
+// Logout — only when authenticated; 401 → clear state and redirect to login
 document.addEventListener('click', async (e) => {
   if (e.target.id === 'logoutBtn') {
     e.preventDefault();
-    try { await api('/auth/logout', { method: 'POST' }); } catch {}
+    if (!currentUser) return;
+    try {
+      await api('/auth/logout', { method: 'POST' });
+    } catch {
+      // 401 or network error: clear state and go to login either way
+    }
     currentUser = null;
     const t = document.getElementById('toast');
     if (t) t.classList.remove('toast--visible');
@@ -580,7 +589,7 @@ async function renderSettings() {
         });
         if (data && data.user) {
           currentUser = data.user;
-          document.documentElement.setAttribute('data-theme', newTheme);
+          applyTheme(newTheme);
           document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           toast('Theme updated!', true);
@@ -591,7 +600,7 @@ async function renderSettings() {
     });
   });
 
-  document.documentElement.setAttribute('data-theme', theme);
+  applyTheme(theme);
 
   $('#changePasswordBtn')?.addEventListener('click', () => showChangePasswordModal());
   $('#editNameBtn')?.addEventListener('click', () => showEditNameModal());
@@ -825,7 +834,7 @@ async function renderLevel(num) {
                 <div class="exercise-rx">${esc(ex.rx)}</div>
               </div>
               ${imgHtml}
-              ${vid ? `<div class="video-wrap"><iframe src="${embedUrl}" title="${esc(ex.name)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}
+              ${vid ? `<div class="video-wrap"><iframe src="${getVideoEmbedUrl(vid, ex.key)}" title="${esc(ex.name)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}
               <form class="log-form" data-level="${num}" data-key="${ex.key}">
                 <div class="log-form-row">
                   <div class="form-group"><label>Sets</label><input type="number" name="sets_completed" min="0" max="20" value="3" inputmode="numeric"></div>
@@ -1043,7 +1052,29 @@ function toast(msg, success) {
   toastTimeout = setTimeout(() => t.classList.remove('toast--visible'), 2500);
 }
 
-// ===== EXERCISE IMAGES (aligned to Ring Muscle Up Program PDF) =====
+// ===== EXERCISE IMAGES (aligned to Ring Muscle Up Program PDF / API levels) =====
+// Fallback: API level keys (e.g. from GET /api/levels) may differ; map to our image keys.
+const EXERCISE_KEY_ALIASES = {
+  pull_ups: 'pull_up',
+  bar_dips: 'bar_dip',
+  false_grip_pullups: 'false_grip_pull_ups',
+  transition_rows: 'transition_ring_rows',
+  ring_rows: 'false_grip_ring_rows',
+  ring_dead_hang: 'ring_hang',
+  negative_muscle_ups: 'tempo_eccentric_ring_muscle_up',
+  muscle_up_sets: 'ring_muscle_up',
+  ring_support: 'ring_dips',
+  support_hold: 'ring_dips',
+  scapular_pulls: 'pull_up',
+  hanging_hold: 'ring_hang',
+  l_sit_hold: 'ring_dips',
+  band_assisted_pull_ups: 'pull_up',
+  band_assisted_muscle_up: 'ring_muscle_up',
+  high_pull: 'pull_up',
+  muscle_up_transition: 'tempo_eccentric_ring_muscle_up',
+  chest_to_wall_handstand: 'arm_extension_stretch',
+  handstand_hold: 'arm_extension_stretch',
+};
 // Single-image map (exercise key → one filename).
 const EXERCISE_IMAGES = {
   false_grip_stretch: 'fgringstretch.png',
@@ -1088,11 +1119,12 @@ function heroHtml(className = '') {
 function getImagesForExercise(ex) {
   if (!ex) return [];
   const keyFrom = (s) => String(s || '').toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-  const key = keyFrom(ex.key);
+  let key = keyFrom(ex.key);
   const nameKey = keyFrom(ex.name);
+  key = EXERCISE_KEY_ALIASES[key] || key;
   if (EXERCISE_PROGRESSION_IMAGES[key]) return EXERCISE_PROGRESSION_IMAGES[key];
   if (EXERCISE_PROGRESSION_IMAGES[nameKey]) return EXERCISE_PROGRESSION_IMAGES[nameKey];
-  const single = EXERCISE_IMAGES[key] || EXERCISE_IMAGES[nameKey];
+  const single = EXERCISE_IMAGES[key] || EXERCISE_IMAGES[nameKey] || EXERCISE_IMAGES[EXERCISE_KEY_ALIASES[nameKey]];
   return single ? [single] : [];
 }
 
@@ -1116,8 +1148,18 @@ function extractVideoId(url) {
   return '';
 }
 
-function extractStartTime(url) {
-  if (!url) return '';
-  const match = url.match(/[?&]t=(\d+)/);
-  return match ? match[1] : '';
+// Video start times in seconds (exercise key → start offset). YouTube embed supports ?start=SECONDS.
+const VIDEO_START_SECONDS = {
+  false_grip_stretch: 142,       // Level 1 wrist warm up — 2:22
+  false_grip_ring_rows: 50,     // Ring rows — 0:50
+  ring_push_ups: 73,             // Push up — 1:13
+  ring_push_ups_turn_out: 73,    // Push up (turn out) — 1:13
+  ring_support: 45,              // Ring support — 0:45
+};
+
+function getVideoEmbedUrl(videoId, exerciseKey) {
+  if (!videoId) return '';
+  const start = VIDEO_START_SECONDS[exerciseKey];
+  const params = start != null ? `?start=${Math.floor(start)}` : '';
+  return `https://www.youtube.com/embed/${videoId}${params}`;
 }

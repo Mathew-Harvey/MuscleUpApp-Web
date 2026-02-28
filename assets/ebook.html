@@ -1547,7 +1547,7 @@ a { color: var(--link); }
       return;
     }
     try {
-      var resp = await fetch('/api/verify-session?session_id=' + encodeURIComponent(sessionId));
+      var resp = await fetch('/api/verify-session?session_id=' + encodeURIComponent(sessionId), { credentials: 'include' });
       var data = await resp.json().catch(function() { return {}; });
       if (resp.ok) { showReader(); }
       else {
