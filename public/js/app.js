@@ -812,6 +812,8 @@ async function renderLevel(num) {
         <!-- Exercises -->
         ${levelData.exercises.map((ex, i) => {
           const vid = extractVideoId(ex.video);
+          const vidStart = extractStartTime(ex.video);
+          const embedUrl = vid ? `https://www.youtube.com/embed/${vid}${vidStart ? '?start=' + vidStart : ''}` : '';
           const images = getImagesForExercise(ex);
           const imgHtml = images.length === 0 ? '' : images.length === 1
             ? `<div class="exercise-img-wrap"><img src="${ASSETS_BASE}/${images[0]}" alt="${esc(ex.name)}" class="exercise-img" loading="lazy"></div>`
@@ -823,7 +825,7 @@ async function renderLevel(num) {
                 <div class="exercise-rx">${esc(ex.rx)}</div>
               </div>
               ${imgHtml}
-              ${vid ? `<div class="video-wrap"><iframe src="https://www.youtube.com/embed/${vid}" title="${esc(ex.name)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}
+              ${vid ? `<div class="video-wrap"><iframe src="${embedUrl}" title="${esc(ex.name)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}
               <form class="log-form" data-level="${num}" data-key="${ex.key}">
                 <div class="log-form-row">
                   <div class="form-group"><label>Sets</label><input type="number" name="sets_completed" min="0" max="20" value="3" inputmode="numeric"></div>
@@ -1112,4 +1114,10 @@ function extractVideoId(url) {
   if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0];
   if (url.includes('v=')) return url.split('v=')[1].split('&')[0];
   return '';
+}
+
+function extractStartTime(url) {
+  if (!url) return '';
+  const match = url.match(/[?&]t=(\d+)/);
+  return match ? match[1] : '';
 }
