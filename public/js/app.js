@@ -967,8 +967,6 @@ async function renderLevel(num) {
         <!-- Exercises -->
         ${levelData.exercises.map((ex, i) => {
           const vid = extractVideoId(ex.video);
-          const vidStart = extractStartTime(ex.video);
-          const embedUrl = vid ? `https://www.youtube.com/embed/${vid}${vidStart ? '?start=' + vidStart : ''}` : '';
           const images = getImagesForExercise(ex);
           const imgHtml = images.length === 0 ? '' : images.length === 1
             ? `<div class="exercise-img-wrap"><img src="${ASSETS_BASE}/${images[0]}" alt="${esc(ex.name)}" class="exercise-img" loading="lazy"></div>`
