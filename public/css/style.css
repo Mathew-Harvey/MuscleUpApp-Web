@@ -193,6 +193,7 @@ img { max-width: 100%; display: block; }
   color: var(--text); font-size: 0.95rem; font-family: var(--body);
 }
 .auth-form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.auth-form input.input-readonly { opacity: 0.6; cursor: not-allowed; }
 .auth-form button { margin-top: 0.75rem; }
 .auth-footer { text-align: center; font-size: 0.85rem; color: var(--sub); margin-top: 1.25rem; }
 .auth-footer-links { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }

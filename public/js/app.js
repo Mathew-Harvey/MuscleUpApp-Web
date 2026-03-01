@@ -46,6 +46,12 @@ function getSetPasswordTokenFromUrl() {
   return params.get('token') || params.get('set_password_token') || null;
 }
 
+function getSuccessSessionIdFromUrl() {
+  if (window.location.pathname !== '/success') return null;
+  const params = new URLSearchParams(window.location.search);
+  return params.get('session_id') || null;
+}
+
 async function handleSetPasswordFlow() {
   const token = getSetPasswordTokenFromUrl();
   if (!token) {
@@ -116,11 +122,141 @@ function closeSetPasswordModal() {
   }
 }
 
+// ===== POST-PURCHASE ONBOARDING FLOW =====
+
+async function handleSuccessFlow() {
+  const sessionId = getSuccessSessionIdFromUrl();
+  if (!sessionId) {
+    navigate('/login');
+    return;
+  }
+  nav.style.display = 'none';
+  app.innerHTML = `
+    <div class="auth-page">
+      ${heroHtml('hero--auth')}
+      <div class="auth-card">
+        <div class="auth-brand"><img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark"><img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light"></div>
+        <p class="auth-sub">Verifying your purchase…</p>
+      </div>
+    </div>`;
+  try {
+    const verify = await api(`/stripe/verify-session?session_id=${encodeURIComponent(sessionId)}`);
+    if (!verify || !verify.email) {
+      app.innerHTML = `<div class="auth-page"><div class="auth-card"><div class="alert alert-error">Could not verify your purchase. Please contact support.</div><p class="auth-footer"><a href="#/login">Go to login</a></p></div></div>`;
+      return;
+    }
+    renderSignupForm(verify.email, sessionId);
+  } catch (err) {
+    app.innerHTML = `<div class="auth-page">${heroHtml('hero--auth')}<div class="auth-card"><div class="alert alert-error">${esc(err.message)}</div><p class="auth-footer"><a href="#/login">Go to login</a></p></div></div>`;
+  }
+}
+
+function renderSignupForm(email, sessionId) {
+  nav.style.display = 'none';
+  app.innerHTML = `
+    <div class="auth-page">
+      ${heroHtml('hero--auth')}
+      <div class="auth-card">
+        <div class="auth-brand"><img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark"><img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light"></div>
+        <h1>Complete your signup</h1>
+        <p class="auth-sub">Payment confirmed! Set up your account to get started.</p>
+        <div class="alert alert-error" id="authError" style="display:none"></div>
+        <form class="auth-form" id="signupForm">
+          <label for="display_name">Your name</label>
+          <input type="text" id="display_name" name="display_name" required autocomplete="name" placeholder="First name">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="${esc(email)}" readonly class="input-readonly">
+          <button type="submit" class="btn btn-primary btn-full">Continue</button>
+        </form>
+      </div>
+    </div>`;
+  $('#signupForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Setting up…';
+    const errEl = $('#authError');
+    if (errEl) errEl.style.display = 'none';
+    try {
+      const data = await api('/stripe/complete-signup', {
+        method: 'POST',
+        body: JSON.stringify({
+          session_id: sessionId,
+          name: f.display_name.value.trim(),
+          email: email,
+        }),
+      });
+      currentUser = data.user;
+      applyTheme(currentUser.theme);
+      renderInlinePasswordSetup();
+    } catch (err) {
+      if (errEl) { errEl.textContent = err.message; errEl.style.display = ''; }
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  };
+}
+
+function renderInlinePasswordSetup() {
+  nav.style.display = 'none';
+  app.innerHTML = `
+    <div class="auth-page">
+      ${heroHtml('hero--auth')}
+      <div class="auth-card">
+        <div class="auth-brand"><img src="/assets/images/bwgymdarklogo.jpg" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--dark"><img src="/assets/images/bwlogo.png" alt="The Bodyweight Gym" class="auth-brand-img auth-brand-img--light"></div>
+        <h1>Set your password</h1>
+        <p class="auth-sub">Choose a password so you can sign in next time.</p>
+        <div class="alert alert-error" id="authError" style="display:none"></div>
+        <form class="auth-form" id="setupPasswordForm">
+          <label for="newPwd">New password</label>
+          <input type="password" id="newPwd" name="newPassword" required minlength="6" autocomplete="new-password" placeholder="At least 6 characters">
+          <label for="confirmPwd">Confirm password</label>
+          <input type="password" id="confirmPwd" name="confirmPassword" required minlength="6" autocomplete="new-password" placeholder="••••••••">
+          <button type="submit" class="btn btn-primary btn-full">Set password &amp; continue</button>
+        </form>
+      </div>
+    </div>`;
+  $('#setupPasswordForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const newPassword = f.newPassword.value;
+    const confirmPassword = f.confirmPassword.value;
+    const errEl = $('#authError');
+    if (newPassword !== confirmPassword) {
+      if (errEl) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = ''; }
+      return;
+    }
+    if (newPassword.length < 6) {
+      if (errEl) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = ''; }
+      return;
+    }
+    const btn = f.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    if (errEl) errEl.style.display = 'none';
+    try {
+      const data = await api('/auth/setup-password', {
+        method: 'POST',
+        body: JSON.stringify({ newPassword, confirm_password: confirmPassword }),
+      });
+      if (data && data.user) currentUser = data.user;
+      window.history.replaceState(null, '', window.location.origin + '/');
+      navigate('/dashboard');
+      toast('Password set. Welcome!', true);
+    } catch (err) {
+      if (errEl) { errEl.textContent = err.message || 'Failed to set password.'; errEl.style.display = ''; }
+      if (btn) { btn.disabled = false; btn.textContent = 'Set password & continue'; }
+    }
+  };
+}
+
 async function router() {
   const hash = window.location.hash.slice(1) || '/';
   const [path, query] = hash.split('?');
+  const publicRoutes = ['/login', '/register', '/forgot-password'];
 
-  if (!currentUser && !['/login', '/register', '/forgot-password'].includes(path)) {
+  if (!currentUser && !publicRoutes.includes(path)) {
     try {
       const me = await api('/auth/me');
       if (me?.authenticated) {
@@ -136,7 +272,13 @@ async function router() {
     }
   }
 
-  if (!['/login', '/register', '/forgot-password'].includes(path) && !LEVELS.length) {
+  if (currentUser && currentUser.needs_password_setup && path !== '/setup-password') {
+    navigate('/setup-password');
+    return;
+  }
+
+  const noLevelRoutes = [...publicRoutes, '/setup-password'];
+  if (!noLevelRoutes.includes(path) && !LEVELS.length) {
     try {
       const data = await api('/levels');
       if (Array.isArray(data)) LEVELS = data;
@@ -145,14 +287,14 @@ async function router() {
     }
   }
 
-  // Only show main app nav when authenticated (never on login/register/forgot-password or set-password)
-  const isAuthRoute = ['/login', '/register', '/forgot-password'].includes(path);
-  nav.style.display = currentUser && !isAuthRoute ? '' : 'none';
+  const hideNavRoutes = [...publicRoutes, '/setup-password'];
+  nav.style.display = currentUser && !hideNavRoutes.includes(path) ? '' : 'none';
   if (currentUser) $('#navUser').textContent = currentUser.display_name;
 
   if (path === '/login') return renderLogin();
   if (path === '/register') return renderRegister();
   if (path === '/forgot-password') return renderForgotPassword();
+  if (path === '/setup-password') return renderInlinePasswordSetup();
   if (path === '/dashboard') return renderDashboard();
   if (path === '/progress') return renderProgress();
   if (path === '/ebook') return renderEbook();
@@ -164,6 +306,10 @@ async function router() {
 
 window.addEventListener('hashchange', router);
 window.addEventListener('DOMContentLoaded', async () => {
+  if (getSuccessSessionIdFromUrl()) {
+    await handleSuccessFlow();
+    return;
+  }
   if (getSetPasswordTokenFromUrl()) {
     await handleSetPasswordFlow();
     return;
