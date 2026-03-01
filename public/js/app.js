@@ -1292,18 +1292,47 @@ function extractVideoId(url) {
   return '';
 }
 
-// Video start times in seconds (exercise key → start offset). YouTube embed supports ?start=SECONDS.
 const VIDEO_START_SECONDS = {
-  false_grip_stretch: 142,       // Level 1 wrist warm up — 2:22
-  false_grip_ring_rows: 50,     // Ring rows — 0:50
-  ring_push_ups: 73,             // Push up — 1:13
-  ring_push_ups_turn_out: 73,    // Push up (turn out) — 1:13
-  ring_support: 45,              // Ring support — 0:45
+  // Level 1
+  wrist_warmup: 142,
+  ring_rows: 50,
+  push_ups: 71,
+  scapula_pulls: 0,
+  ring_support: 38,
+  // Level 2
+  wrist_warmup_2: 142,
+  pull_ups: 0,
+  bar_dips: 0,
+  false_grip_hang: 0,
+  transition_rows: 17,
+  ring_support_2: 38,
+  // Level 3
+  wrist_warmup_3: 142,
+  false_grip_pullups: 35,
+  ring_dips: 21,
+  false_grip_rows: 12,
+  ring_support_turnout: 38,
+  // Level 4
+  wrist_warmup_4: 142,
+  false_grip_pullups_4: 35,
+  negative_muscle_ups: 17,
+  deep_ring_dips: 0,
+  russian_dips: 0,
+  // Level 5
+  wrist_warmup_5: 142,
+  false_grip_pull_high: 35,
+  muscle_up_attempts: 0,
+  transition_catch: 0,
+  deep_dips_5: 0,
+  // Level 6
+  muscle_up_sets: 66,
+  ring_strength: 0,
 };
 
 function getVideoEmbedUrl(videoId, exerciseKey) {
   if (!videoId) return '';
-  const start = VIDEO_START_SECONDS[exerciseKey];
+  const normalised = EXERCISE_KEY_ALIASES[exerciseKey] || exerciseKey;
+  const start = VIDEO_START_SECONDS[exerciseKey] ?? VIDEO_START_SECONDS[normalised];
   const params = start != null ? `?start=${Math.floor(start)}` : '';
   return `https://www.youtube.com/embed/${videoId}${params}`;
 }
